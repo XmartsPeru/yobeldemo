@@ -1,0 +1,413 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* xmpe_api_yobelscm
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-03-14 17:09+0000\n"
+"PO-Revision-Date: 2022-03-14 13:15-0400\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: es_PE\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"X-Generator: Poedit 3.0.1\n"
+
+#. module: xmpe_api_yobelscm
+#: model_terms:ir.ui.view,arch_db:xmpe_api_yobelscm.res_config_settings_view_form
+msgid ""
+"<span class=\"o_form_label\">General\n"
+"                                        Options</span>"
+msgstr ""
+"<span class=“o_form_label”>Opciones\n"
+"                                        Generales</span>"
+
+#. module: xmpe_api_yobelscm
+#: code:addons/xmpe_api_yobelscm/models/res_config_settings.py:0
+#: model:ir.model.fields,field_description:xmpe_api_yobelscm.field_res_config_settings__is_api_test
+#, python-format
+msgid "API Test"
+msgstr "API Prueba"
+
+#. module: xmpe_api_yobelscm
+#: code:addons/xmpe_api_yobelscm/models/stock_picking.py:0
+#: model:ir.model.fields.selection,name:xmpe_api_yobelscm.selection__stock_picking__yobel_state__accepted
+#, python-format
+msgid "Accepted"
+msgstr "Aceptada"
+
+#. module: xmpe_api_yobelscm
+#: code:addons/xmpe_api_yobelscm/models/stock_picking.py:0
+#: model:ir.model.fields,field_description:xmpe_api_yobelscm.field_stock_picking__additional_1
+#, python-format
+msgid "Additional 1"
+msgstr "Adicional 1"
+
+#. module: xmpe_api_yobelscm
+#: code:addons/xmpe_api_yobelscm/models/stock_picking.py:0
+#: model:ir.model.fields,field_description:xmpe_api_yobelscm.field_stock_move__additional_2
+#, python-format
+msgid "Additional 2"
+msgstr "Adicional 2"
+
+#. module: xmpe_api_yobelscm
+#: code:addons/xmpe_api_yobelscm/models/product.py:0
+#: model:ir.model.fields,field_description:xmpe_api_yobelscm.field_product_product__batch_flag
+#: model:ir.model.fields,field_description:xmpe_api_yobelscm.field_product_template__batch_flag
+#, python-format
+msgid "Batch Flag"
+msgstr "Indicador de lote"
+
+#. module: xmpe_api_yobelscm
+#: model:ir.model,name:xmpe_api_yobelscm.model_res_company
+msgid "Companies"
+msgstr "Compañías"
+
+#. module: xmpe_api_yobelscm
+#: code:addons/xmpe_api_yobelscm/models/res_config_settings.py:0
+#: model:ir.model.fields,field_description:xmpe_api_yobelscm.field_res_config_settings__company
+#, python-format
+msgid "Company"
+msgstr "Compañía"
+
+#. module: xmpe_api_yobelscm
+#: model:ir.model,name:xmpe_api_yobelscm.model_res_config_settings
+msgid "Config Settings"
+msgstr "Opciones de configuración"
+
+#. module: xmpe_api_yobelscm
+#: code:addons/xmpe_api_yobelscm/models/stock_picking.py:0
+#: model:ir.model.fields.selection,name:xmpe_api_yobelscm.selection__stock_picking__yobel_state__confirmed
+#, python-format
+msgid "Confirmed"
+msgstr "Confirmado"
+
+#. module: xmpe_api_yobelscm
+#: model:ir.model,name:xmpe_api_yobelscm.model_res_partner
+msgid "Contact"
+msgstr "Contacto"
+
+#. module: xmpe_api_yobelscm
+#: code:addons/xmpe_api_yobelscm/models/stock_picking.py:0
+#: model:ir.model.fields,field_description:xmpe_api_yobelscm.field_stock_picking__container_number
+#, python-format
+msgid "Container number"
+msgstr "Número de contenedor"
+
+#. module: xmpe_api_yobelscm
+#: model_terms:ir.ui.view,arch_db:xmpe_api_yobelscm.view_partner_yobel_form_inhert
+msgid "Delivery Merchandise"
+msgstr "Mercancía de entrega"
+
+#. module: xmpe_api_yobelscm
+#: model:ir.model.fields,field_description:xmpe_api_yobelscm.field_product_product__display_name
+#: model:ir.model.fields,field_description:xmpe_api_yobelscm.field_product_template__display_name
+#: model:ir.model.fields,field_description:xmpe_api_yobelscm.field_res_company__display_name
+#: model:ir.model.fields,field_description:xmpe_api_yobelscm.field_res_config_settings__display_name
+#: model:ir.model.fields,field_description:xmpe_api_yobelscm.field_res_partner__display_name
+#: model:ir.model.fields,field_description:xmpe_api_yobelscm.field_stock_move__display_name
+#: model:ir.model.fields,field_description:xmpe_api_yobelscm.field_stock_picking__display_name
+msgid "Display Name"
+msgstr "Nombre mostrado"
+
+#. module: xmpe_api_yobelscm
+#: model_terms:ir.ui.view,arch_db:xmpe_api_yobelscm.product_template_form_view
+#: model_terms:ir.ui.view,arch_db:xmpe_api_yobelscm.view_partner_yobel_form_inhert
+#: model_terms:ir.ui.view,arch_db:xmpe_api_yobelscm.view_picking_form
+msgid "Enviar a Yobel"
+msgstr ""
+
+#. module: xmpe_api_yobelscm
+#: code:addons/xmpe_api_yobelscm/models/stock_picking.py:0
+#: model:ir.model.fields,field_description:xmpe_api_yobelscm.field_stock_picking__flag_1
+#, python-format
+msgid "Flag 1"
+msgstr "Bandera 1"
+
+#. module: xmpe_api_yobelscm
+#: code:addons/xmpe_api_yobelscm/models/stock_picking.py:0
+#: model:ir.model.fields,field_description:xmpe_api_yobelscm.field_stock_move__flag_2
+#, python-format
+msgid "Flag 2"
+msgstr "Bandera 2"
+
+#. module: xmpe_api_yobelscm
+#: code:addons/xmpe_api_yobelscm/models/product.py:0
+#: model:ir.model.fields,field_description:xmpe_api_yobelscm.field_product_product__high
+#: model:ir.model.fields,field_description:xmpe_api_yobelscm.field_product_template__high
+#, python-format
+msgid "High"
+msgstr "Alto"
+
+#. module: xmpe_api_yobelscm
+#: model:ir.model.fields,field_description:xmpe_api_yobelscm.field_product_product__id
+#: model:ir.model.fields,field_description:xmpe_api_yobelscm.field_product_template__id
+#: model:ir.model.fields,field_description:xmpe_api_yobelscm.field_res_company__id
+#: model:ir.model.fields,field_description:xmpe_api_yobelscm.field_res_config_settings__id
+#: model:ir.model.fields,field_description:xmpe_api_yobelscm.field_res_partner__id
+#: model:ir.model.fields,field_description:xmpe_api_yobelscm.field_stock_move__id
+#: model:ir.model.fields,field_description:xmpe_api_yobelscm.field_stock_picking__id
+msgid "ID"
+msgstr "ID"
+
+#. module: xmpe_api_yobelscm
+#: model_terms:ir.ui.view,arch_db:xmpe_api_yobelscm.view_picking_form
+msgid "Integración con Yobel"
+msgstr ""
+
+#. module: xmpe_api_yobelscm
+#: model:ir.model.fields,field_description:xmpe_api_yobelscm.field_product_product____last_update
+#: model:ir.model.fields,field_description:xmpe_api_yobelscm.field_product_template____last_update
+#: model:ir.model.fields,field_description:xmpe_api_yobelscm.field_res_company____last_update
+#: model:ir.model.fields,field_description:xmpe_api_yobelscm.field_res_config_settings____last_update
+#: model:ir.model.fields,field_description:xmpe_api_yobelscm.field_res_partner____last_update
+#: model:ir.model.fields,field_description:xmpe_api_yobelscm.field_stock_move____last_update
+#: model:ir.model.fields,field_description:xmpe_api_yobelscm.field_stock_picking____last_update
+msgid "Last Modified on"
+msgstr "Última modificación el"
+
+#. module: xmpe_api_yobelscm
+#: code:addons/xmpe_api_yobelscm/models/product.py:0
+#: model:ir.model.fields,field_description:xmpe_api_yobelscm.field_product_product__length
+#: model:ir.model.fields,field_description:xmpe_api_yobelscm.field_product_template__length
+#, python-format
+msgid "Length"
+msgstr "Longitud"
+
+#. module: xmpe_api_yobelscm
+#: code:addons/xmpe_api_yobelscm/models/stock_picking.py:0
+#: model:ir.model.fields.selection,name:xmpe_api_yobelscm.selection__stock_picking__yobel_state__lost
+#, python-format
+msgid "Lost"
+msgstr "Perdida"
+
+#. module: xmpe_api_yobelscm
+#: code:addons/xmpe_api_yobelscm/models/stock_picking.py:0
+#: model:ir.model.fields,field_description:xmpe_api_yobelscm.field_stock_move__max_unit_per_package_picking
+#, python-format
+msgid "Maximum units per package for Picking"
+msgstr "Máximo de unidades por paquete para Picking"
+
+#. module: xmpe_api_yobelscm
+#: code:addons/xmpe_api_yobelscm/models/res_partner.py:0
+#: model:ir.model.fields,field_description:xmpe_api_yobelscm.field_res_partner__delivery_address_reference
+#: model:ir.model.fields,field_description:xmpe_api_yobelscm.field_res_users__delivery_address_reference
+#, python-format
+msgid "Merchandise delivery address reference"
+msgstr "Referencia de la dirección de entrega de la mercancía"
+
+#. module: xmpe_api_yobelscm
+#: code:addons/xmpe_api_yobelscm/models/product.py:0
+#: code:addons/xmpe_api_yobelscm/models/res_partner.py:0
+#: code:addons/xmpe_api_yobelscm/models/stock_picking.py:0
+#: model:ir.model.fields,field_description:xmpe_api_yobelscm.field_product_product__notify_message
+#: model:ir.model.fields,field_description:xmpe_api_yobelscm.field_product_template__notify_message
+#: model:ir.model.fields,field_description:xmpe_api_yobelscm.field_res_partner__notify_message
+#: model:ir.model.fields,field_description:xmpe_api_yobelscm.field_res_users__notify_message
+#: model:ir.model.fields,field_description:xmpe_api_yobelscm.field_stock_picking__notify_message
+#, python-format
+msgid "Notify Message"
+msgstr "Mensaje de notificación"
+
+#. module: xmpe_api_yobelscm
+#: code:addons/xmpe_api_yobelscm/models/stock_picking.py:0
+#: model:ir.model.fields,field_description:xmpe_api_yobelscm.field_stock_picking__numeric_1
+#, python-format
+msgid "Numeric 1"
+msgstr "Numérico 1"
+
+#. module: xmpe_api_yobelscm
+#: code:addons/xmpe_api_yobelscm/models/stock_picking.py:0
+#: model:ir.model.fields,field_description:xmpe_api_yobelscm.field_stock_move__numeric_2
+#, python-format
+msgid "Numeric 2"
+msgstr "Numérico 2"
+
+#. module: xmpe_api_yobelscm
+#: code:addons/xmpe_api_yobelscm/models/product.py:0
+#: code:addons/xmpe_api_yobelscm/models/res_partner.py:0
+#: code:addons/xmpe_api_yobelscm/models/stock_picking.py:0
+#: model:ir.model.fields,field_description:xmpe_api_yobelscm.field_product_product__origin_date
+#: model:ir.model.fields,field_description:xmpe_api_yobelscm.field_product_template__origin_date
+#: model:ir.model.fields,field_description:xmpe_api_yobelscm.field_res_partner__origin_date
+#: model:ir.model.fields,field_description:xmpe_api_yobelscm.field_res_users__origin_date
+#: model:ir.model.fields,field_description:xmpe_api_yobelscm.field_stock_picking__origin_date
+#, python-format
+msgid "Origin Date"
+msgstr "Fecha de origen"
+
+#. module: xmpe_api_yobelscm
+#: code:addons/xmpe_api_yobelscm/models/res_config_settings.py:0
+#: model:ir.model.fields,field_description:xmpe_api_yobelscm.field_res_config_settings__passwd
+#, python-format
+msgid "Password"
+msgstr "Contraseña"
+
+#. module: xmpe_api_yobelscm
+#: model:ir.model,name:xmpe_api_yobelscm.model_product_product
+msgid "Product"
+msgstr "Producto"
+
+#. module: xmpe_api_yobelscm
+#: model:ir.model,name:xmpe_api_yobelscm.model_product_template
+msgid "Product Template"
+msgstr "Plantilla de producto"
+
+#. module: xmpe_api_yobelscm
+#: code:addons/xmpe_api_yobelscm/models/stock_picking.py:0
+#: model:ir.model.fields.selection,name:xmpe_api_yobelscm.selection__stock_picking__yobel_state__rejected
+#, python-format
+msgid "Rejected"
+msgstr "Rechazado"
+
+#. module: xmpe_api_yobelscm
+#: code:addons/xmpe_api_yobelscm/models/stock_picking.py:0
+#: model:ir.model.fields.selection,name:xmpe_api_yobelscm.selection__stock_picking__yobel_state__sent
+#, python-format
+msgid "Sent"
+msgstr "Enviado"
+
+#. module: xmpe_api_yobelscm
+#: code:addons/xmpe_api_yobelscm/models/product.py:0
+#: model:ir.model.fields,field_description:xmpe_api_yobelscm.field_product_product__serial_control_flag
+#: model:ir.model.fields,field_description:xmpe_api_yobelscm.field_product_template__serial_control_flag
+#, python-format
+msgid "Serial Control Flag"
+msgstr "Indicador de control en serie"
+
+#. module: xmpe_api_yobelscm
+#: model:ir.model,name:xmpe_api_yobelscm.model_stock_move
+msgid "Stock Move"
+msgstr "Movimiento de Stock"
+
+#. module: xmpe_api_yobelscm
+#: code:addons/xmpe_api_yobelscm/models/stock_picking.py:0
+#: model:ir.model.fields,field_description:xmpe_api_yobelscm.field_stock_picking__store
+#, python-format
+msgid "Store"
+msgstr "Almacén"
+
+#. module: xmpe_api_yobelscm
+#: code:addons/xmpe_api_yobelscm/models/product.py:0
+#: model:ir.model.fields,field_description:xmpe_api_yobelscm.field_product_product__supplier_sku_code
+#: model:ir.model.fields,field_description:xmpe_api_yobelscm.field_product_template__supplier_sku_code
+#, python-format
+msgid "Supplier SKU Code"
+msgstr "Código SKU del cliente"
+
+#. module: xmpe_api_yobelscm
+#: code:addons/xmpe_api_yobelscm/models/product.py:0
+#: code:addons/xmpe_api_yobelscm/models/res_partner.py:0
+#: code:addons/xmpe_api_yobelscm/models/stock_picking.py:0
+#: model:ir.model.fields,field_description:xmpe_api_yobelscm.field_product_product__sync
+#: model:ir.model.fields,field_description:xmpe_api_yobelscm.field_product_template__sync
+#: model:ir.model.fields,field_description:xmpe_api_yobelscm.field_res_partner__sync
+#: model:ir.model.fields,field_description:xmpe_api_yobelscm.field_res_users__sync
+#: model:ir.model.fields,field_description:xmpe_api_yobelscm.field_stock_picking__sync
+#, python-format
+msgid "Synchronization"
+msgstr "Sincronización"
+
+#. module: xmpe_api_yobelscm
+#: model_terms:ir.ui.view,arch_db:xmpe_api_yobelscm.res_config_settings_view_form
+msgid "Test Mode"
+msgstr "Modo de prueba"
+
+#. module: xmpe_api_yobelscm
+#: model:ir.model,name:xmpe_api_yobelscm.model_stock_picking
+msgid "Transfer"
+msgstr "Albarán"
+
+#. module: xmpe_api_yobelscm
+#: code:addons/xmpe_api_yobelscm/models/product.py:0
+#: model:ir.model.fields,field_description:xmpe_api_yobelscm.field_product_product__units_per_package
+#: model:ir.model.fields,field_description:xmpe_api_yobelscm.field_product_template__units_per_package
+#, python-format
+msgid "Units per package 1"
+msgstr "Unidades por paquete 1"
+
+#. module: xmpe_api_yobelscm
+#: code:addons/xmpe_api_yobelscm/models/res_config_settings.py:0
+#: model:ir.model.fields,field_description:xmpe_api_yobelscm.field_res_config_settings__username
+#, python-format
+msgid "Username"
+msgstr "Nombre de usuario"
+
+#. module: xmpe_api_yobelscm
+#: code:addons/xmpe_api_yobelscm/models/product.py:0
+#: model:ir.model.fields,field_description:xmpe_api_yobelscm.field_product_product__width
+#: model:ir.model.fields,field_description:xmpe_api_yobelscm.field_product_template__width
+#, python-format
+msgid "Width"
+msgstr "Ancho"
+
+#. module: xmpe_api_yobelscm
+#: model:ir.actions.server,name:xmpe_api_yobelscm.yobel_client_sync_cron_ir_actions_server
+#: model:ir.cron,cron_name:xmpe_api_yobelscm.yobel_client_sync_cron
+#: model:ir.cron,name:xmpe_api_yobelscm.yobel_client_sync_cron
+msgid "Yobel Client Synchronization"
+msgstr "Sincronización del cliente Yobel"
+
+#. module: xmpe_api_yobelscm
+#: code:addons/xmpe_api_yobelscm/models/res_company.py:0
+#: model:ir.model.fields,field_description:xmpe_api_yobelscm.field_res_company__yobel_identifier
+#, python-format
+msgid "Yobel Identifier"
+msgstr "Yobel.Identificador "
+
+#. module: xmpe_api_yobelscm
+#: model:ir.actions.server,name:xmpe_api_yobelscm.yobel_order_sync_cron_ir_actions_server
+#: model:ir.cron,cron_name:xmpe_api_yobelscm.yobel_order_sync_cron
+#: model:ir.cron,name:xmpe_api_yobelscm.yobel_order_sync_cron
+msgid "Yobel Order Synchronization"
+msgstr "Sincronización de pedidos de Yobel"
+
+#. module: xmpe_api_yobelscm
+#: model:ir.actions.server,name:xmpe_api_yobelscm.yobel_product_sync_cron_ir_actions_server
+#: model:ir.cron,cron_name:xmpe_api_yobelscm.yobel_product_sync_cron
+#: model:ir.cron,name:xmpe_api_yobelscm.yobel_product_sync_cron
+msgid "Yobel Product Synchronization"
+msgstr "Sincronización de productos Yobel"
+
+#. module: xmpe_api_yobelscm
+#: model_terms:ir.ui.view,arch_db:xmpe_api_yobelscm.res_config_settings_view_form
+msgid "Yobel SCM"
+msgstr "Yobel SCM"
+
+#. module: xmpe_api_yobelscm
+#: model:ir.actions.server,name:xmpe_api_yobelscm.yobel_shipment_sync_cron_ir_actions_server
+#: model:ir.cron,cron_name:xmpe_api_yobelscm.yobel_shipment_sync_cron
+#: model:ir.cron,name:xmpe_api_yobelscm.yobel_shipment_sync_cron
+msgid "Yobel Shipment Synchronization"
+msgstr "Sincronización de envíos de Yobel"
+
+#. module: xmpe_api_yobelscm
+#: code:addons/xmpe_api_yobelscm/models/stock_picking.py:0
+#: model:ir.model.fields,field_description:xmpe_api_yobelscm.field_stock_picking__yobel_state
+#, python-format
+msgid "Yobel State"
+msgstr "Estados en Yobel"
+
+#. module: xmpe_api_yobelscm
+#: code:addons/xmpe_api_yobelscm/models/product.py:0
+#: code:addons/xmpe_api_yobelscm/models/res_partner.py:0
+#: code:addons/xmpe_api_yobelscm/models/stock_picking.py:0
+#: model:ir.model.fields,field_description:xmpe_api_yobelscm.field_product_product__yobel_sync
+#: model:ir.model.fields,field_description:xmpe_api_yobelscm.field_product_template__yobel_sync
+#: model:ir.model.fields,field_description:xmpe_api_yobelscm.field_res_partner__yobel_sync
+#: model:ir.model.fields,field_description:xmpe_api_yobelscm.field_res_users__yobel_sync
+#: model:ir.model.fields,field_description:xmpe_api_yobelscm.field_stock_picking__yobel_sync
+#, python-format
+msgid "Yobel Synchronization"
+msgstr "Sincronización con Yobel"
+
+#. module: xmpe_api_yobelscm
+#: code:addons/xmpe_api_yobelscm/models/stock_picking.py:0
+#: model:ir.model.fields,field_description:xmpe_api_yobelscm.field_stock_move__yobel_customer_warehouse
+#, python-format
+msgid "yobel Customer Warehouse"
+msgstr "Almacén de Clientes"

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="view_partner_yobel_form_inhert" model="ir.ui.view">
+            <field name="name">res.partner.yobel.form.inherit</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//sheet" position="before">
+                    <div>
+                        <button name="send_yobel_customer_data"
+                                type="object" class="oe_link oe_inline"
+                                string="Enviar a Yobel"
+                                attrs="{'invisible': [('yobel_sync', '=', False)]}"/>
+                        <div class="alert alert-warning" role="alert"
+                             style="margin-bottom:0px;"
+                             attrs="{'invisible': [('yobel_sync', '=', False)]}">
+                            <field name="notify_message"/>
+                        </div>
+                        <field name="yobel_sync" invisible="1"/>
+                    </div>
+                </xpath>
+
+                <xpath expr="//div[hasclass('oe_title')]" position="after">
+                    <div>
+                        <field name="yobel_sync" widget="boolean_toggle"/>
+                        <label for="yobel_sync"/>
+                    </div>
+                </xpath>
+
+                <field name="category_id" position="after">
+                    <label for="delivery_address_reference"
+                           string="Delivery Merchandise"/>
+                    <div>
+                        <field name="delivery_address_reference"/>
+                    </div>
+                </field>
+            </field>
+        </record>
+
+    </data>
+</odoo>

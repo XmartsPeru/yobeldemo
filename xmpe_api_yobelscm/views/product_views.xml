@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record model="ir.ui.view"
+                id="product_template_form_view">
+            <field name="name">product.template.yobel.form</field>
+            <field name="model">product.template</field>
+            <field name="groups_id"
+                   eval="[(4, ref('stock.group_stock_user'))]"/>
+            <field name="inherit_id"
+                   ref="product.product_template_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//label[@for='volume']" position="before">
+                    <field name="batch_flag"/>
+                    <field name="supplier_sku_code"/>
+                    <field name="serial_control_flag"/>
+                    <field name="length"/>
+                    <field name="high"/>
+                    <field name="width"/>
+                </xpath>
+
+                <xpath expr="//div[@name='options']" position="inside">
+                    <div>
+                        <field name="yobel_sync" widget="boolean_toggle"/>
+                        <label for="yobel_sync"/>
+                    </div>
+                </xpath>
+                <xpath expr="//header" position="after">
+                    <button name="send_yobel_product_data"
+                            type="object" class="oe_link oe_inline"
+                            string="Enviar a Yobel"
+                            attrs="{'invisible': [('yobel_sync', '=', False)]}"/>
+                    <div class="alert alert-warning" role="alert"
+                         style="margin-bottom:0px;"
+                         attrs="{'invisible': [('yobel_sync', '=', False)]}">
+                        <field name="notify_message"/>
+                    </div>
+                </xpath>
+
+            </field>
+        </record>
+
+
+    </data>
+</odoo>

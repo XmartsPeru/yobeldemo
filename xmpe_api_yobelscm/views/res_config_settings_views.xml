@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="res_config_settings_view_form" model="ir.ui.view">
+            <field name="name">res.config.settings.view.form.inherit.yobel
+            </field>
+            <field name="model">res.config.settings</field>
+            <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[hasclass('settings')]" position="inside">
+                    <div class="app_settings_block"
+                         data-string="Yobel SCM Integration"
+                         string="Yobel SCM" data-key="yobelscm">
+                        <h2>Yobel SCM</h2>
+                        <div class="row mt16 o_settings_container"
+                             name="yobel_setting_container">
+                            <div class="col-12 col-lg-6 o_setting_box"
+                                 id="yobel_setting" title="Yobel SCM">
+                                <div class="col-12 col-lg-6 o_setting_box">
+                                    <div class="o_setting_left_pane">
+                                        <field name="is_api_test"/>
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <label for="is_api_test"/>
+                                        <div class="text-muted">
+                                            Test Mode
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="o_setting_right_pane"
+                                     attrs="{'invisible': [('is_api_test', '=', True)]}">
+                                    <span class="o_form_label">General
+                                        Options</span>
+                                    <div class="content-group"
+                                         name="yobel_general_options">
+                                        <div class="row">
+                                            <label for="company"
+                                                   class="o_light_label ml16"/>
+                                            <field name="company"
+                                                   class="col-lg-4 ml16"/>
+                                        </div>
+                                        <div class="row">
+                                            <label for="username"
+                                                   class="o_light_label ml16"/>
+                                            <field name="username"
+                                                   class="col-lg-4 ml16"/>
+                                        </div>
+                                        <div class="row">
+                                            <label for="passwd"
+                                                   class="o_light_label ml16"/>
+                                            <field name="passwd"
+                                                   password="True"
+                                                   class="col-lg-4 ml16"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+
+        <!--<record id="action_yobel_config_settings" model="ir.actions.act_window">
+            <field name="name">Settings</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">res.config.settings</field>
+            <field name="view_mode">form</field>
+            <field name="target">inline</field>
+            <field name="context">{'module': 'xmpe_api_yobel'}</field>
+        </record>-->
+
+        <!-- This Menu Item must have a parent and an action -->
+        <!--<menuitem id="yobel_settings_menu" name="Settings"
+                  parent="yobel_config_menu"
+                  action="action_yobel_config_settings"
+                  sequence="61"/>-->
+    </data>
+</odoo>
