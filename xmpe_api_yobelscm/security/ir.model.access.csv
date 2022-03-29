@@ -1,1 +1,2 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_xmpe_error_msg,Error Message,xmpe_api_yobelscm.model_xmpe_error_msg,base.group_user,1,0,0,0

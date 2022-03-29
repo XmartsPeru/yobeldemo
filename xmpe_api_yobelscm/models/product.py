@@ -11,8 +11,7 @@ headers = {'Content-type': 'application/json'}
 
 _logger = logging.getLogger(__name__)
 
-url_test = 'http://yscmserver-test.yobelscm.biz:1973/TI_Logistics' \
-           '/WSYOB_RECEP_LOG/WSYOB_RECEP/CrearProductoHJ'
+url_test = 'http://yscmserver-test.yobelscm.biz:1973/TI_Logistics/WSYOB_RECEP_LOG/WSYOB_RECEP/CrearProductoHJ'
 url = 'http://yscmserver-04.yobelscm.biz:1973/WSYOB_RECEP_LOG/WSYOB_RECEP/CrearProductoHJ'
 data_test = {
     "Seguridad": {
@@ -114,6 +113,9 @@ class ProductTemplate(models.Model):
 
     notify_message = fields.Char(string=_('Notify Message'), )
 
+    id_mensaje = fields.Char(string=_('Mensaje ID'), copy=False, readonly=True,
+                             index=True, default=lambda self: _('New'))
+
     # Calcula el volumen del producto
     @api.depends('product_variant_ids', 'product_variant_ids.volume',
                  'length', 'high', 'width')
@@ -156,7 +158,7 @@ class ProductTemplate(models.Model):
                 })
         return {
             "Head": {
-                "id_mensaje": "PRB20190327001",
+                "id_mensaje": self.id_mensaje,
                 "sistema_origen": "SAP",
                 "fecha_origen": self.origin_date.date().strftime(
                     DEFAULT_SERVER_DATE_FORMAT),
@@ -175,10 +177,11 @@ class ProductTemplate(models.Model):
             "password": ICPSudo.get_param('xmpe_api_yobelscm.passwd')
         }
 
-    def send_yobel_data(self, url, data):
+    def send_yobel_data(self, url_target, data):
         try:
             data_json = json.dumps(data)
-            req = requests.post(url, data=data_json, headers=headers)
+            _logger.info(json.dumps(data, indent=4))
+            req = requests.post(url=url_target, data=data_json, headers=headers)
             content = req.json()
         except IOError:
             _logger.error("Error in sending data to Yobel SCM")
@@ -189,18 +192,17 @@ class ProductTemplate(models.Model):
 
     def send_yobel_product_data(self):
         ICPSudo = self.env['ir.config_parameter'].sudo()
+        self.write({'id_mensaje': self.env['ir.sequence'].next_by_code('product.template') or _('New')})
         data = {
             "Seguridad": self.fill_security(),
             "Mensaje": self.fill_message()
         }
         is_api_test = ICPSudo.get_param('xmpe_api_yobelscm.is_api_test')
+        _logger.info("Yobel Product Data: %s", data)
+        req = self.send_yobel_data(url_test, data)
         if is_api_test:
             _logger.info("Yobel Product Data Test: %s", data_test)
             req = self.send_yobel_data(url_test, data_test)
-        else:
-            _logger.info("Yobel Product Data: %s", data)
-            req = self.send_yobel_data(url_test, data)
-            # self.write({'state': 'sent'})
 
         if req['CrearProductoHJResult']['resultado'] == 'OK':
             self.write({
@@ -219,5 +221,3 @@ class ProductProduct(models.Model):
 
     def send_yobel_product_data(self):
         return self.product_tmpl_id.send_yobel_product_data()
-
-

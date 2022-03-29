@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="view_xmpe_error_msg_form" model="ir.ui.view">
+            <field name="name">view.xmpe.error.msg.form</field>
+            <field name="model">xmpe.error.msg</field>
+            <field name="arch" type="xml">
+                <form string="ModelTitle">
+                    <sheet>
+                        <div class="oe_title">
+                            <label for="code"/>
+                            <h1>
+                                <field name="code"
+                                       placeholder="Code"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <field name="description"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+         <record id="view_xmpe_error_msg_tree" model="ir.ui.view">
+            <field name="name">view.xmpe.error.msg.tree</field>
+            <field name="model">xmpe.error.msg</field>
+            <field name="arch" type="xml">
+                <tree string="Error Message">
+                    <field name="code"/>
+                    <field name="description"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_xmpe_error_msg" model="ir.actions.act_window">
+            <field name="name">Error Message</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">xmpe.error.msg</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    There is no examples click here to add new Error Message.
+                </p>
+            </field>
+        </record>
+
+        <menuitem name="Yobel Error Message" id="xmpe_error_msg_menu"
+                  parent="stock.menu_stock_config_settings"
+                  action="action_xmpe_error_msg"/>
+
+    </data>
+</odoo>

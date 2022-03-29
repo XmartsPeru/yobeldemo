@@ -25,6 +25,10 @@
                         <field name="yobel_sync" widget="boolean_toggle"/>
                         <label for="yobel_sync"/>
                     </div>
+                    <div>
+                        <label for="id_mensaje"/>
+                        <field name="id_mensaje"/>
+                    </div>
                 </xpath>
                 <xpath expr="//header" position="after">
                     <button name="send_yobel_product_data"

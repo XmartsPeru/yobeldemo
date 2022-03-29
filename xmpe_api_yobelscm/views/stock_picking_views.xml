@@ -26,6 +26,12 @@
                         </div>
                     </group>
                     <group>
+                        <label for="id_mensaje"/>
+                        <div class="o_row">
+                            <field name="id_mensaje"/>
+                        </div>
+                    </group>
+                    <group>
                         <group attrs="{'invisible': [('picking_type_code', '=', 'outgoing')]}">
                             <field name="container_number"/>
                         </group>
