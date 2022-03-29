@@ -29,8 +29,8 @@ data_test = {
         "Body": {
             "Productos": [
                 {
-                    "PRDCIA": "IRX",
-                    "PRDPRO": "PRODIRX1001",
+                    "PRDCIA": "LIB",
+                    "PRDPRO": "PRODLIB1001",
                     "PRDDES": "PRODUCTO PRB",
                     "PRDFAM": "FAMILIA",
                     "PRDSFM": "SUBFAMILIA",
@@ -55,8 +55,8 @@ data_test = {
                     "PRDSER": "0"
                 },
                 {
-                    "PRDCIA": "IRX",
-                    "PRDPRO": "PRODIRX1002",
+                    "PRDCIA": "LIB",
+                    "PRDPRO": "PRODLIB1002",
                     "PRDDES": "PRODUCTO PRB-PRODUCTO PRB-PRODUCTO PRB-PRODUCTO PRB",
                     "PRDFAM": "FAMILIA",
                     "PRDSFM": "SUBFAMILIA",

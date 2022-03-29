@@ -38,11 +38,11 @@ order_test = {
         "Body": {
             "Pedidos": [
                 {
-                    "PEDCIA": "IRX",
+                    "PEDCIA": "LIB",
                     "PEDFPR": "2018-12-14",
                     "PEDCTR": "P1",
-                    "PEDNRO": "PEDIRX101",
-                    "PEDCCL": "CLIIRX01",
+                    "PEDNRO": "PEDLIB101",
+                    "PEDCCL": "CLILIB01",
                     "PEDFCH": "2018-12-14",
                     "PEDTIT": "2",
                     "PEDTUN": "30",
@@ -58,7 +58,7 @@ order_test = {
                     "Detalles": [
                         {
                             "PEDAUX": "1",
-                            "PEDCPR": "PRODIRX01",
+                            "PEDCPR": "PRODLIB01",
                             "PEDLOT": "",
                             "PEDCTD": "10",
                             "PEDALM": "",
@@ -70,7 +70,7 @@ order_test = {
                         },
                         {
                             "PEDAUX": "2",
-                            "PEDCPR": "PRODIRX02",
+                            "PEDCPR": "PRODLIB02",
                             "PEDLOT": "",
                             "PEDCTD": "20",
                             "PEDALM": "",
@@ -83,11 +83,11 @@ order_test = {
                     ]
                 },
                 {
-                    "PEDCIA": "IRX",
+                    "PEDCIA": "LIB",
                     "PEDFPR": "2018-12-14",
                     "PEDCTR": "P1",
-                    "PEDNRO": "PEDIRX102",
-                    "PEDCCL": "CLIIRX02",
+                    "PEDNRO": "PEDLIB102",
+                    "PEDCCL": "CLILIB02",
                     "PEDFCH": "2018-12-14",
                     "PEDTIT": "1",
                     "PEDTUN": "20",
@@ -103,7 +103,7 @@ order_test = {
                     "Detalles": [
                         {
                             "PEDAUX": "1",
-                            "PEDCPR": "PRODIRX03",
+                            "PEDCPR": "PRODLIB03",
                             "PEDLOT": "",
                             "PEDCTD": "20",
                             "PEDALM": "",
@@ -136,8 +136,8 @@ data_test = {
         "Body": {
             "Embarques": [
                 {
-                    "EMBCIA": "IRX",
-                    "EMBNRO": "IRXEMBPRB001",
+                    "EMBCIA": "LIB",
+                    "EMBNRO": "LIBEMBPRB001",
                     "EMBFA1": "2018-12-14",
                     "EMBOCP": "OC0001",
                     "EMBPRV1": "PRV0001",
@@ -171,8 +171,8 @@ data_test = {
                     ]
                 },
                 {
-                    "EMBCIA": "IRX",
-                    "EMBNRO": "IRXEMBPRB002",
+                    "EMBCIA": "LIB",
+                    "EMBNRO": "LIBEMBPRB002",
                     "EMBFA1": "2018-12-14",
                     "EMBOCP": "OC0002",
                     "EMBPRV1": "PRV0002",
