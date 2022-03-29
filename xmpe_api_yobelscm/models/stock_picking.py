@@ -1,5 +1,6 @@
 import json
 import logging
+from datetime import datetime
 
 import requests
 from odoo.exceptions import UserError
@@ -23,9 +24,9 @@ url_yobel = {
 }
 order_test = {
     "Seguridad": {
-        "compania": "PLT",
-        "usuario": "PEPLTUSR01",
-        "password": "Y0b3lPrb01"
+        "compania": "LIB",
+        "usuario": "PELIBUSR01",
+        "password": "Y0bLibPrb01"
     },
     "Mensaje": {
         "Head": {
@@ -237,8 +238,13 @@ class Picking(models.Model):
                                    selection=YOBEL_STATE, default='',
                                    readonly=True)
 
-    id_mensaje = fields.Char(string=_('Mensaje ID'), copy=False, readonly=True,
+    id_mensaje_out = fields.Char(string=_('Mensaje ID'), copy=False,
+                               readonly=True,
                              index=True, default=lambda self: _('New'))
+
+    id_mensaje_in = fields.Char(string=_('Mensaje ID'), copy=False,
+                                 readonly=True,
+                                 index=True, default=lambda self: _('New'))
 
     def fill_security(self):
         ICPSudo = self.env['ir.config_parameter'].sudo()
@@ -265,7 +271,7 @@ class Picking(models.Model):
                     "EMBN02": ""
                 })
             shipment_list.append({
-                "EMBCIA": rec.company_id.yobel_identifier,
+                "EMBCIA": self.env.company.yobel_identifier,
                 "EMBNRO": rec.name,
                 "EMBFA1": rec.scheduled_date.strftime(DEFAULT_SERVER_DATE_FORMAT),
                 "EMBOCP": rec.name[:6],
@@ -279,7 +285,7 @@ class Picking(models.Model):
             # detail_list.clear()
         return {
             "Head": {
-                "id_mensaje": "EMB-PRB-001",
+                "id_mensaje": self.id_mensaje_in,
                 "sistema_origen": "SAP",
                 "fecha_origen": fields.Datetime.now().strftime(DEFAULT_SERVER_DATE_FORMAT),
                 "tipo": "RECEMB"
@@ -318,7 +324,12 @@ class Picking(models.Model):
                 req = self.send_yobel_data(url_yobel['shipment_test'], data)
                 # self.write({'state': 'sent'})
             if req['CrearEmbarqueResult']['resultado'] == 'OK':
-                self.write({'yobel_sync': False, 'yobel_state': 'sent'})
+                self.write({
+                    'yobel_sync': False,
+                    'yobel_state': 'sent',
+                    'id_mensaje_in': self.env['ir.sequence'].next_by_code(
+                        'yobel_master_emb')
+                })
                 self.notify_message = 'Embarque enviado a Yobel SCM exitosamente'
             else:
                 message = []
@@ -345,8 +356,8 @@ class Picking(models.Model):
                     "PEDF02": detail.flag_2 or '',
                 })
             order_list.append({
-                "PEDCIA": rec.company_id.yobel_identifier,
-                "PEDFPR": rec.date_done.strftime(DEFAULT_SERVER_DATE_FORMAT),
+                "PEDCIA": self.env.company.yobel_identifier,
+                "PEDFPR": rec.scheduled_date.strftime(DEFAULT_SERVER_DATE_FORMAT),
                 "PEDCTR": 'P1',
                 "PEDNRO": rec.name,
                 "PEDCCL": rec.name,
@@ -357,9 +368,9 @@ class Picking(models.Model):
                     DEFAULT_SERVER_DATETIME_FORMAT)[:10],
                 "PEDHOI": rec.scheduled_date.strftime(
                     DEFAULT_SERVER_DATETIME_FORMAT)[11:],
-                "PEDFEF": rec.date_done.strftime(
+                "PEDFEF": rec.scheduled_date.strftime(
                     DEFAULT_SERVER_DATETIME_FORMAT)[:10],
-                "PEDHOF": rec.date_done.strftime(
+                "PEDHOF": rec.scheduled_date.strftime(
                     DEFAULT_SERVER_DATETIME_FORMAT)[11:],
                 "PEDNOC": '',
                 "PEDTDA": rec.store or '',
@@ -371,7 +382,7 @@ class Picking(models.Model):
             # detail_list.clear()
         return {
             "Head": {
-                "id_mensaje": "PRB20181214002",
+                "id_mensaje": self.id_mensaje_out,
                 "sistema_origen": "SAP",
                 "fecha_origen": self.origin_date.strftime(
                     DEFAULT_SERVER_DATETIME_FORMAT),
@@ -398,7 +409,12 @@ class Picking(models.Model):
                 req = self.send_yobel_data(url_yobel['order_test'], data)
                 # self.write({'state': 'sent'})
             if req['CrearPedidoResult']['resultado'] == 'OK':
-                self.write({'yobel_sync': False, 'yobel_state': 'sent'})
+                self.write({
+                    'yobel_sync': False,
+                    'yobel_state': 'sent',
+                    'id_mensaje_out': self.env['ir.sequence'].next_by_code(
+                        'yobel_master_prb')
+                })
                 self.notify_message = 'Embarque enviado a Yobel SCM exitosamente'
             else:
                 message = []

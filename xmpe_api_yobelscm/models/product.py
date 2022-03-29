@@ -15,9 +15,9 @@ url_test = 'http://yscmserver-test.yobelscm.biz:1973/TI_Logistics/WSYOB_RECEP_LO
 url = 'http://yscmserver-04.yobelscm.biz:1973/WSYOB_RECEP_LOG/WSYOB_RECEP/CrearProductoHJ'
 data_test = {
     "Seguridad": {
-        "compania": "PLT",
-        "usuario": "PEPLTUSR01",
-        "password": "Y0b3lPrb01"
+        "compania": "LIB",
+        "usuario": "PELIBUSR01",
+        "password": "Y0bLibPrb01"
     },
     "Mensaje": {
         "Head": {
@@ -131,7 +131,7 @@ class ProductTemplate(models.Model):
         if self.yobel_sync:
             for rec in self:
                 product_list.append({
-                    "PRDCIA": rec.company_id.yobel_identifier,
+                    "PRDCIA": self.env.company.yobel_identifier,
                     "PRDPRO": rec.default_code,
                     "PRDDES": rec.name,
                     "PRDFAM": rec.categ_id.name[:10],
@@ -192,7 +192,6 @@ class ProductTemplate(models.Model):
 
     def send_yobel_product_data(self):
         ICPSudo = self.env['ir.config_parameter'].sudo()
-        self.write({'id_mensaje': self.env['ir.sequence'].next_by_code('product.template') or _('New')})
         data = {
             "Seguridad": self.fill_security(),
             "Mensaje": self.fill_message()
@@ -207,7 +206,9 @@ class ProductTemplate(models.Model):
         if req['CrearProductoHJResult']['resultado'] == 'OK':
             self.write({
                 'yobel_sync': False,
-                'notify_message': 'Producto enviado a Yobel SCM exitosamente'
+                'notify_message': 'Producto enviado a Yobel SCM exitosamente',
+                'id_mensaje': self.env['ir.sequence'].next_by_code(
+                    'yobel_master_prb')
             })
         else:
             message = []

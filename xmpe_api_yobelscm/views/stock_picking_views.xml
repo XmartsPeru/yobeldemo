@@ -25,10 +25,18 @@
                             <field name="yobel_sync" widget="boolean_toggle"/>
                         </div>
                     </group>
-                    <group>
-                        <label for="id_mensaje"/>
+                    <group
+                            attrs="{'invisible': [('picking_type_code', '=', 'outgoing')]}">
+                        <label for="id_mensaje_in"/>
                         <div class="o_row">
-                            <field name="id_mensaje"/>
+                            <field name="id_mensaje_in"/>
+                        </div>
+                    </group>
+                    <group
+                            attrs="{'invisible': [('picking_type_code', '!=', 'outgoing')]}">
+                        <label for="id_mensaje_out"/>
+                        <div class="o_row">
+                            <field name="id_mensaje_out"/>
                         </div>
                     </group>
                     <group>
@@ -59,8 +67,7 @@
                             string="Enviar a Yobel"
                             attrs="{'invisible': ['|', ('yobel_sync', '=', False),('picking_type_code', '!=', 'outgoing')]}"/>
                     <div class="alert alert-warning" role="alert"
-                         style="margin-bottom:0px;"
-                         attrs="{'invisible': [('yobel_sync', '=', False)]}">
+                         style="margin-bottom:0px;">
                         <field name="notify_message"/>
                     </div>
                 </xpath>

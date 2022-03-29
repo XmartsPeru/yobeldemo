@@ -14,11 +14,10 @@
                                 string="Enviar a Yobel"
                                 attrs="{'invisible': [('yobel_sync', '=', False)]}"/>
                         <div class="alert alert-warning" role="alert"
-                             style="margin-bottom:0px;"
-                             attrs="{'invisible': [('yobel_sync', '=', False)]}">
+                             style="margin-bottom:0px;">
                             <field name="notify_message"/>
                         </div>
-                        <field name="yobel_sync" invisible="1"/>
+                        <!--<field name="yobel_sync" invisible="1"/>-->
                     </div>
                 </xpath>
 

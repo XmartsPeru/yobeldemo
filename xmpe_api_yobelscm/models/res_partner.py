@@ -16,9 +16,9 @@ url_test = 'http://yscmserver-test.yobelscm.biz:1973/TI_Logistics/WSYOB_RECEP_LO
 url = 'http://yscmserver-04.yobelscm.biz:1973/WSYOB_RECEP_LOG/WSYOB_RECEP/CrearCliente'
 data_test = {
     "Seguridad": {
-        "compania": "PLT",
-        "usuario": "PEPLTUSR01",
-        "password": "Y0b3lPrb01"
+        "compania": "LIB",
+        "usuario": "PELIBUSR01",
+        "password": "Y0bLibPrb01"
     },
     "Mensaje": {
         "Head": {
@@ -110,7 +110,7 @@ class Partner(models.Model):
 
         for rec in self:
             shipment_list.append({
-                "CLICIA": rec.company_id.yobel_identifier or rec.env.company.yobel_identifier,
+                "CLICIA": self.env.company.yobel_identifier,
                 "CLIFPR": self.origin_date.date().strftime(DEFAULT_SERVER_DATE_FORMAT),
                 "CLICCL": rec.vat,
                 "CLINBR": rec.name,
@@ -118,7 +118,7 @@ class Partner(models.Model):
                 "CLIUBG": int('0123456789'),
                 "CLINBRF": rec.name,
                 "CLIDIRF": f'{rec.street}, {rec.city}',
-                "CLIUBF": rec.street,
+                "CLIUBF": rec.street[:10],
                 "CLIRUC": rec.vat,
                 "CLIREF": rec.delivery_address_reference,
                 "CLIDNI": rec.vat,
@@ -133,7 +133,7 @@ class Partner(models.Model):
             # detail_list.clear()
         return {
             "Head": {
-                "id_mensaje": "PRB20190328001",
+                "id_mensaje": self.id_mensaje,
                 "sistema_origen": "SAP",
                 "fecha_origen": self.origin_date.date().strftime(DEFAULT_SERVER_DATETIME_FORMAT),
                 "tipo": "RECCLIEN"
@@ -171,7 +171,11 @@ class Partner(models.Model):
             req = self.send_yobel_data(url_test, data)
             # self.write({'state': 'sent'})
         if req['CrearClienteResult']['resultado'] == 'OK':
-            self.write({'yobel_sync': False})
+            self.write({
+                'yobel_sync': False,
+                'id_mensaje': self.env['ir.sequence'].next_by_code(
+                    'yobel_master_prb')
+            })
             self.notify_message = 'Cliente enviado a Yobel SCM exitosamente'
         else:
             message = []
