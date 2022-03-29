@@ -97,10 +97,11 @@ class XmpeApiYobelscm(http.Controller):
         datas = json.loads(http.request.httprequest.data)
         _logger.info(datas)
         domain = [('id_mensaje', '=', datas['Mensaje']['Head']['id_mensaje'])]
-        model_product_template = self.env['product.template'].search(domain)
-        model_stock_picking = self.env['stock.picking'].search(domain)
-        model_partner = self.env['res.partner'].search(domain)
-        error_message = self.env['xmpe.error.msg']\
+        model_product_template = http.request.env['product.template'].sudo().search(domain)
+        model_stock_picking = http.request.env['stock.picking'].sudo().search(
+            domain)
+        model_partner = http.request.env['res.partner'].sudo().search(domain)
+        error_message = http.request.env['xmpe.error.msg'].sudo()\
             .search([('code', '=', datas['Mensaje']['Body']['codigo'])],
                     limit=1)
 
