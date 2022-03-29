@@ -118,7 +118,10 @@ class XmpeApiYobelscm(http.Controller):
         if model_partner.ids != 0:
             model_partner.notify_message = error_message.description
 
-        res = datas.get('result', 'OK')
+        res = datas.get('result', 'ERROR')
+
+        if not (model_product_template.ids == [] and model_stock_picking.ids == [] and model_partner.ids == []):
+            res = datas.get('result', 'OK')
 
         return res
 
@@ -136,7 +139,10 @@ class XmpeApiYobelscm(http.Controller):
             'id_mensaje']), ('id_mensaje_out', '=', datas['Mensaje']['Head']['id_mensaje'])])
         model_partner = http.request.env['res.partner'].sudo().search(domain)
 
-        res = datas.get('result', 'OK')
+        res = datas.get('result', 'ERROR')
+
+        if not(model_product_template.ids == [] and model_stock_picking.ids == [] and model_partner.ids == []):
+            res = datas.get('result', 'OK')
 
         # return {
         #     'success': True,
