@@ -1,0 +1,35 @@
+id,code,description
+SEGSER01,SEGSER01,Error de validación de usuario del servicio
+MSG1002,MSG1002,Proceso RECEPCION DE INTERFACE no existe en modelo por compañía
+MSG1003,MSG1003,Origen de interface no definido en modelo por compañía.
+MSG1004,MSG1004,Interface no definido en Cia:
+MSG1005,MSG1005,Proceso ADM FILES no existe en modelo por compañía
+MSG1006,MSG1006,Nombre de GOA no definido en variables.
+MSG1007,MSG1007,Actividad correo no definido en modelo por compañía.
+MSG1008,MSG1008,Destinatarios correo no definido en modelo por compañía.
+MSG1009,MSG1009,Error en ejecución de GOA
+PRDSER01,PRDSER01,El valor del elemento XXXXXX es inválido. La longitud es menor a la esperada.
+PRDSER02,PRDSER02,El formato de fecha para el campo XXXXXX es inválido.
+PRDSER03,PRDSER03,Error en insertar registro: Desde servicio WEB
+PRDSER04,PRDSER04,Error en insertar registro: Proceso de validación.
+ERR004,ERR004,Error en insertar registro: Desde servicio WEB
+MSG1034,MSG1034,El embarque no tiene código proveedor
+MSG1035,MSG1035,El embarque ya existe
+MSG1036,MSG1036,El Producto no existe en el maestro
+MSG1037,MSG1037,Proveedor no existe en el maestro.
+CLISER01,CLISER01,El valor del elemento XXXXXX es inválido. La longitud es menor a la esperada.
+CLISER02,CLISER02,El formato de fecha para el campo XXXXXX es inválido.
+CLISER03,CLISER03,Error en insertar registro: Desde servicio WEB
+CLISER04,CLISER04,Error en insertar registro: Proceso de validación.
+MSG1023,MSG1023,El pedido &1 con fecha de cita: &2 ha sido cambiado por: &3
+MSG1024,MSG1024,El Pedido &1 del archivo CABECERA (CAB) No está registrado en DETALLE (DET) de pedidos
+MSG1025,MSG1025,El Pedido &1 del archivo DETALLE (DET) No Existe en CABECERA (CAB) de pedidos
+MSG1026,MSG1026,El Cliente &1 del archivo CABECERA (CAB) No Existe en el archivo CLIENTES (CLI)
+MSG1027,MSG1027,El producto &1 del archivo DETALLE (DET) No Existe en el archivo de PRODUCTOS (PRD)
+MSG1028,MSG1028,El Pedido &1 del archivo CABECERA (CAB) ya ha sido facturado con Fecha &2
+MSG1029,MSG1029,Producto &1 del archivo DETALLE(DET) se encuentra duplicado en el pedido &2
+MSG1030,MSG1030,Pedido &5 Total Peso &6: TOTAL PESO rebasa tamaño de campo CABTPS
+MSG1031,MSG1031,Cia &1 Fpr &2 Lote &3 Ctr &4 Pedido &5 Total Volumen &6: TOTAL VOLUMEN rebasa tamaño de campo CABTVL
+MSG1032,MSG1032,Pedido &5 Producto &6: PESO tamaño de campo DETPES
+MSG1033,MSG1033,Pedido &5 Producto &6: VOLUMEN rebasa tamaño de campo DETVOL
+MSG1038,MSG1038,El pedido &1 ya existe

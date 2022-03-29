@@ -30,8 +30,11 @@
         'views/stock_picking_views.xml',
         'views/res_company_views.xml',
         'views/res_config_settings_views.xml',
+        'views/error_msg_views.xml',
         # Cron Jobs
+        'data/ir_sequence.xml',
         'data/ir_cron.xml',
+        'data/xmpe.error.msg.csv',
     ],
     # only loaded in demonstration mode
     'demo': [

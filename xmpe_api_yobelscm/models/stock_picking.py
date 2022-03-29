@@ -237,6 +237,9 @@ class Picking(models.Model):
                                    selection=YOBEL_STATE, default='',
                                    readonly=True)
 
+    id_mensaje = fields.Char(string=_('Mensaje ID'), copy=False, readonly=True,
+                             index=True, default=lambda self: _('New'))
+
     def fill_security(self):
         ICPSudo = self.env['ir.config_parameter'].sudo()
         return {
