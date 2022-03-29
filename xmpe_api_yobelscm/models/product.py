@@ -192,6 +192,10 @@ class ProductTemplate(models.Model):
 
     def send_yobel_product_data(self):
         ICPSudo = self.env['ir.config_parameter'].sudo()
+        self.write({
+            'id_mensaje': self.env['ir.sequence'].next_by_code(
+                'yobel_master_prb')
+        })
         data = {
             "Seguridad": self.fill_security(),
             "Mensaje": self.fill_message()
@@ -207,8 +211,6 @@ class ProductTemplate(models.Model):
             self.write({
                 'yobel_sync': False,
                 'notify_message': 'Producto enviado a Yobel SCM exitosamente',
-                'id_mensaje': self.env['ir.sequence'].next_by_code(
-                    'yobel_master_prb')
             })
         else:
             message = []

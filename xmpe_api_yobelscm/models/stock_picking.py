@@ -310,6 +310,10 @@ class Picking(models.Model):
     def send_yobel_shipment_data(self):
         if self.picking_type_code != 'outgoing':
             ICPSudo = self.env['ir.config_parameter'].sudo()
+            self.write({
+                'id_mensaje_in': self.env['ir.sequence'].next_by_code(
+                        'yobel_master_emb')
+            })
             data = {
                 "Seguridad": self.fill_security(),
                 "Mensaje": self.fill_message()
@@ -327,8 +331,6 @@ class Picking(models.Model):
                 self.write({
                     'yobel_sync': False,
                     'yobel_state': 'sent',
-                    'id_mensaje_in': self.env['ir.sequence'].next_by_code(
-                        'yobel_master_emb')
                 })
                 self.notify_message = 'Embarque enviado a Yobel SCM exitosamente'
             else:
@@ -396,6 +398,10 @@ class Picking(models.Model):
     def send_yobel_order_data(self):
         if self.picking_type_code == 'outgoing':
             ICPSudo = self.env['ir.config_parameter'].sudo()
+            self.write({
+                'id_mensaje_out': self.env['ir.sequence'].next_by_code(
+                    'yobel_master_prb')
+            })
             data = {
                 "Seguridad": self.fill_security(),
                 "Mensaje": self.fill_order_message()
@@ -412,8 +418,6 @@ class Picking(models.Model):
                 self.write({
                     'yobel_sync': False,
                     'yobel_state': 'sent',
-                    'id_mensaje_out': self.env['ir.sequence'].next_by_code(
-                        'yobel_master_prb')
                 })
                 self.notify_message = 'Embarque enviado a Yobel SCM exitosamente'
             else:
