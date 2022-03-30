@@ -2,6 +2,9 @@ import logging
 import json
 
 from odoo import http, fields
+from odoo.http import JsonRequest, Response
+
+from odoo.tools import date_utils
 
 _logger = logging.getLogger(__name__)
 
@@ -46,14 +49,14 @@ class XmpeApiYobelscm(http.Controller):
                 if pick.name == data['Mensaje']['Body']['ConfEmbarque'][
                     'CEMEMB']:
                     pick.yobel_state = 'lost'
-            res = data.get('result', 'ERROR')
+            res = 'ERROR'
         else:
             for pick in picking_model.filtered(
                     lambda p: p.yobel_state == 'sent'):
                 if pick.name == data['Mensaje']['Body']['ConfEmbarque'][
                     'CEMEMB']:
                     pick.yobel_state = 'confirmed'
-            res = data.get('result', 'OK')
+            res = 'OK'
         return res
 
     @http.route('/web/ConfPedido', auth='none', type="json",
@@ -81,13 +84,13 @@ class XmpeApiYobelscm(http.Controller):
                     lambda p: p.yobel_state == 'sent'):
                 if pick.name == data['Mensaje']['Body']['ConfPedido']['CPINRO']:
                     pick.yobel_state = 'lost'
-            res = data.get('result', 'ERROR')
+            res = 'ERROR'
         else:
             for pick in picking_model.filtered(
                     lambda p: p.yobel_state == 'sent'):
                 if pick.name == data['Mensaje']['Body']['ConfPedido']['CPINRO']:
                     pick.yobel_state = 'confirmed'
-            res = data.get('result', 'OK')
+            res = 'OK'
         return res
 
     @http.route('/web/RetornoError', auth='none', type="json",
@@ -118,10 +121,11 @@ class XmpeApiYobelscm(http.Controller):
         if model_partner.ids != 0:
             model_partner.notify_message = error_message.description
 
-        res = datas.get('result', 'ERROR')
+        res = 'ERROR'
 
-        if not (model_product_template.ids == [] and model_stock_picking.ids == [] and model_partner.ids == []):
-            res = datas.get('result', 'OK')
+        if not (
+                model_product_template.ids == [] and model_stock_picking.ids == [] and model_partner.ids == []):
+            res = 'OK'
 
         return res
 
@@ -134,20 +138,18 @@ class XmpeApiYobelscm(http.Controller):
         domain = [('id_mensaje', '=', datas['Mensaje']['Head']['id_mensaje'])]
         model_product_template = http.request.env[
             'product.template'].sudo().search(domain)
-        model_stock_picking = http.request.env['stock.picking'].sudo()\
+        model_stock_picking = http.request.env['stock.picking'].sudo() \
             .search(['|', ('id_mensaje_in', '=', datas['Mensaje']['Head'][
-            'id_mensaje']), ('id_mensaje_out', '=', datas['Mensaje']['Head']['id_mensaje'])])
+            'id_mensaje']), ('id_mensaje_out', '=',
+                             datas['Mensaje']['Head']['id_mensaje'])])
         model_partner = http.request.env['res.partner'].sudo().search(domain)
 
-        res = datas.get('result', 'ERROR')
+        res = 'ERROR'
 
-        if not(model_product_template.ids == [] and model_stock_picking.ids == [] and model_partner.ids == []):
-            res = datas.get('result', 'OK')
+        if not (
+                model_product_template.ids == [] and model_stock_picking.ids == [] and model_partner.ids == []):
+            res = 'OK'
 
-        # return {
-        #     'success': True,
-        #     'status': 'OK',
-        #     'code': 200
-        # }
 
         return res
+

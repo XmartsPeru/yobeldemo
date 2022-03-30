@@ -419,7 +419,7 @@ class Picking(models.Model):
                     'yobel_sync': False,
                     'yobel_state': 'sent',
                 })
-                self.notify_message = 'Embarque enviado a Yobel SCM exitosamente'
+                self.notify_message = 'Pedido enviado a Yobel SCM exitosamente'
             else:
                 message = []
                 for error in req['CrearPedidoResult']['errores']:
