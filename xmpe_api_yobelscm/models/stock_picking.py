@@ -308,37 +308,38 @@ class Picking(models.Model):
         return content
 
     def send_yobel_shipment_data(self):
-        if self.picking_type_code != 'outgoing':
-            ICPSudo = self.env['ir.config_parameter'].sudo()
-            self.write({
-                'id_mensaje_in': self.env['ir.sequence'].next_by_code(
-                        'yobel_master_emb')
-            })
-            data = {
-                "Seguridad": self.fill_security(),
-                "Mensaje": self.fill_message()
-            }
-            is_api_test = ICPSudo.get_param('xmpe_api_yobelscm.is_api_test')
-            if is_api_test:
-                _logger.info("Yobel Shipment Data Test: %s", data_test)
-                req = self.send_yobel_data(url_yobel['shipment_test'],
-                                           data_test)
-            else:
-                _logger.info("Yobel Shipment Data: %s", data)
-                req = self.send_yobel_data(url_yobel['shipment_test'], data)
-                # self.write({'state': 'sent'})
-            if req['CrearEmbarqueResult']['resultado'] == 'OK':
+        if self.yobel_sync:
+            if self.picking_type_code != 'outgoing':
+                ICPSudo = self.env['ir.config_parameter'].sudo()
                 self.write({
-                    'yobel_sync': False,
-                    'yobel_state': 'sent',
+                    'id_mensaje_in': self.env['ir.sequence'].next_by_code(
+                            'yobel_master_emb')
                 })
-                self.notify_message = 'Embarque enviado a Yobel SCM exitosamente'
-            else:
-                message = []
-                for error in req['CrearEmbarqueResult']['errores']:
-                    message.append(error['descripcion'])
-                self.notify_message = "\n ".join(message)
-                self.write({'yobel_state': 'rejected'})
+                data = {
+                    "Seguridad": self.fill_security(),
+                    "Mensaje": self.fill_message()
+                }
+                is_api_test = ICPSudo.get_param('xmpe_api_yobelscm.is_api_test')
+                if is_api_test:
+                    _logger.info("Yobel Shipment Data Test: %s", data_test)
+                    req = self.send_yobel_data(url_yobel['shipment_test'],
+                                               data_test)
+                else:
+                    _logger.info("Yobel Shipment Data: %s", data)
+                    req = self.send_yobel_data(url_yobel['shipment_test'], data)
+                    # self.write({'state': 'sent'})
+                if req['CrearEmbarqueResult']['resultado'] == 'OK':
+                    self.write({
+                        'yobel_sync': False,
+                        'yobel_state': 'sent',
+                    })
+                    self.notify_message = 'Embarque enviado a Yobel SCM exitosamente'
+                else:
+                    message = []
+                    for error in req['CrearEmbarqueResult']['errores']:
+                        message.append(error['descripcion'])
+                    self.notify_message = "\n ".join(message)
+                    self.write({'yobel_state': 'rejected'})
 
     def fill_order_message(self):
         order_list = []
@@ -396,36 +397,37 @@ class Picking(models.Model):
         }
 
     def send_yobel_order_data(self):
-        if self.picking_type_code == 'outgoing':
-            ICPSudo = self.env['ir.config_parameter'].sudo()
-            self.write({
-                'id_mensaje_out': self.env['ir.sequence'].next_by_code(
-                    'yobel_master_prb')
-            })
-            data = {
-                "Seguridad": self.fill_security(),
-                "Mensaje": self.fill_order_message()
-            }
-            is_api_test = ICPSudo.get_param('xmpe_api_yobelscm.is_api_test')
-            if is_api_test:
-                _logger.info("Yobel Order Data Test: %s", order_test)
-                req = self.send_yobel_data(url_yobel['order_test'], order_test)
-            else:
-                _logger.info("Yobel Order Data: %s", data)
-                req = self.send_yobel_data(url_yobel['order_test'], data)
-                # self.write({'state': 'sent'})
-            if req['CrearPedidoResult']['resultado'] == 'OK':
+        if self.yobel_sync:
+            if self.picking_type_code == 'outgoing':
+                ICPSudo = self.env['ir.config_parameter'].sudo()
                 self.write({
-                    'yobel_sync': False,
-                    'yobel_state': 'sent',
+                    'id_mensaje_out': self.env['ir.sequence'].next_by_code(
+                        'yobel_master_prb')
                 })
-                self.notify_message = 'Pedido enviado a Yobel SCM exitosamente'
-            else:
-                message = []
-                for error in req['CrearPedidoResult']['errores']:
-                    message.append(error['descripcion'])
-                self.notify_message = "\n ".join(message)
-                self.write({'yobel_state': 'rejected'})
+                data = {
+                    "Seguridad": self.fill_security(),
+                    "Mensaje": self.fill_order_message()
+                }
+                is_api_test = ICPSudo.get_param('xmpe_api_yobelscm.is_api_test')
+                if is_api_test:
+                    _logger.info("Yobel Order Data Test: %s", order_test)
+                    req = self.send_yobel_data(url_yobel['order_test'], order_test)
+                else:
+                    _logger.info("Yobel Order Data: %s", data)
+                    req = self.send_yobel_data(url_yobel['order_test'], data)
+                    # self.write({'state': 'sent'})
+                if req['CrearPedidoResult']['resultado'] == 'OK':
+                    self.write({
+                        'yobel_sync': False,
+                        'yobel_state': 'sent',
+                    })
+                    self.notify_message = 'Pedido enviado a Yobel SCM exitosamente'
+                else:
+                    message = []
+                    for error in req['CrearPedidoResult']['errores']:
+                        message.append(error['descripcion'])
+                    self.notify_message = "\n ".join(message)
+                    self.write({'yobel_state': 'rejected'})
 
 
 class StockMove(models.Model):

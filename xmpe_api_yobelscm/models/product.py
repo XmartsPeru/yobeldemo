@@ -191,32 +191,33 @@ class ProductTemplate(models.Model):
         return content
 
     def send_yobel_product_data(self):
-        ICPSudo = self.env['ir.config_parameter'].sudo()
-        self.write({
-            'id_mensaje': self.env['ir.sequence'].next_by_code(
-                'yobel_master_prb')
-        })
-        data = {
-            "Seguridad": self.fill_security(),
-            "Mensaje": self.fill_message()
-        }
-        is_api_test = ICPSudo.get_param('xmpe_api_yobelscm.is_api_test')
-        _logger.info("Yobel Product Data: %s", data)
-        req = self.send_yobel_data(url_test, data)
-        if is_api_test:
-            _logger.info("Yobel Product Data Test: %s", data_test)
-            req = self.send_yobel_data(url_test, data_test)
-
-        if req['CrearProductoHJResult']['resultado'] == 'OK':
+        if self.yobel_sync:
+            ICPSudo = self.env['ir.config_parameter'].sudo()
             self.write({
-                'yobel_sync': False,
-                'notify_message': 'Producto enviado a Yobel SCM exitosamente',
+                'id_mensaje': self.env['ir.sequence'].next_by_code(
+                    'yobel_master_prb')
             })
-        else:
-            message = []
-            for error in req['CrearProductoHJResult']['errores']:
-                message.append(error['descripcion'])
-            self.write({'notify_message': f'\n '.join(message)})
+            data = {
+                "Seguridad": self.fill_security(),
+                "Mensaje": self.fill_message()
+            }
+            is_api_test = ICPSudo.get_param('xmpe_api_yobelscm.is_api_test')
+            _logger.info("Yobel Product Data: %s", data)
+            req = self.send_yobel_data(url_test, data)
+            if is_api_test:
+                _logger.info("Yobel Product Data Test: %s", data_test)
+                req = self.send_yobel_data(url_test, data_test)
+
+            if req['CrearProductoHJResult']['resultado'] == 'OK':
+                self.write({
+                    'yobel_sync': False,
+                    'notify_message': 'Producto enviado a Yobel SCM exitosamente',
+                })
+            else:
+                message = []
+                for error in req['CrearProductoHJResult']['errores']:
+                    message.append(error['descripcion'])
+                self.write({'notify_message': f'\n '.join(message)})
 
 
 class ProductProduct(models.Model):
