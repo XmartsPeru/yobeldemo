@@ -261,10 +261,10 @@ class Picking(models.Model):
             for detail in rec.move_ids_without_package:
                 detail_list.append({
                     "EMBLIN": detail.id,
-                    "EMBPRO": detail.product_id.default_code,
+                    "EMBPRO": detail.product_id.default_code[:30],
                     "EMBQTY": int(detail.product_uom_qty),
-                    "EMBUMC": detail.product_uom.name,
-                    "EMBLOT": detail.product_id.name,
+                    "EMBUMC": detail.product_uom.name[:10],
+                    "EMBLOT": detail.product_id.name[:25],
                     "EMBFVE": detail.date.strftime('%Y%m%d'),
                     "EMBALX": "",
                     "EMBA02": "",
@@ -275,7 +275,7 @@ class Picking(models.Model):
                 "EMBNRO": rec.name,
                 "EMBFA1": rec.scheduled_date.strftime(DEFAULT_SERVER_DATE_FORMAT),
                 "EMBOCP": rec.name[:6],
-                "EMBPRV1": rec.company_id.name,
+                "EMBPRV1": rec.company_id.vat or '',
                 "EMBPOR": rec.company_id.state_id.code,
                 "EMBNCT": "0001",
                 "EMBA01": "",
@@ -389,7 +389,7 @@ class Picking(models.Model):
                 "sistema_origen": "SAP",
                 "fecha_origen": self.origin_date.strftime(
                     DEFAULT_SERVER_DATETIME_FORMAT),
-                "tipo": "RECEMB"
+                "tipo": "RECPED"
             },
             "Body": {
                 "Pedidos": order_list

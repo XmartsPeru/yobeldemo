@@ -17,7 +17,7 @@ class XmpeApiYobelscm(http.Controller):
         username = ICPSudo.get_param('xmpe_api_yobelscm.username')
         passwd = ICPSudo.get_param('xmpe_api_yobelscm.passwd')
         if data['Seguridad']['compania'] != company or data['Seguridad'][
-            'usuario'] != username or data['Seguridad']['password'] != passwd:
+                'usuario'] != username or data['Seguridad']['password'] != passwd:
             return False
         return True
 
@@ -47,7 +47,7 @@ class XmpeApiYobelscm(http.Controller):
             for pick in picking_model.filtered(
                     lambda p: p.yobel_state == 'sent'):
                 if pick.name == data['Mensaje']['Body']['ConfEmbarque'][
-                    'CEMEMB']:
+                        'CEMEMB']:
                     pick.yobel_state = 'lost'
             res = {
                 'RetornoInsertResult': {
@@ -59,7 +59,7 @@ class XmpeApiYobelscm(http.Controller):
             for pick in picking_model.filtered(
                     lambda p: p.yobel_state == 'sent'):
                 if pick.name == data['Mensaje']['Body']['ConfEmbarque'][
-                    'CEMEMB']:
+                        'CEMEMB']:
                     pick.yobel_state = 'confirmed'
             res = {
                 'RetornoInsertResult': {
@@ -125,8 +125,8 @@ class XmpeApiYobelscm(http.Controller):
             'product.template'].sudo().search(domain)
         model_stock_picking = http.request.env['stock.picking'].sudo() \
             .search(['|', ('id_mensaje_in', '=', datas['Mensaje']['Head'][
-            'id_mensaje']), ('id_mensaje_out', '=',
-                             datas['Mensaje']['Head']['id_mensaje'])])
+                'id_mensaje']), ('id_mensaje_out', '=',
+                                 datas['Mensaje']['Head']['id_mensaje'])])
         model_partner = http.request.env['res.partner'].sudo().search(domain)
         error_message = http.request.env['xmpe.error.msg'].sudo() \
             .search([('code', '=', datas['Mensaje']['Body']['codigo'])],
@@ -170,8 +170,8 @@ class XmpeApiYobelscm(http.Controller):
             'product.template'].sudo().search(domain)
         model_stock_picking = http.request.env['stock.picking'].sudo() \
             .search(['|', ('id_mensaje_in', '=', datas['Mensaje']['Head'][
-            'id_mensaje']), ('id_mensaje_out', '=',
-                             datas['Mensaje']['Head']['id_mensaje'])])
+                'id_mensaje']), ('id_mensaje_out', '=',
+                                 datas['Mensaje']['Head']['id_mensaje'])])
         model_partner = http.request.env['res.partner'].sudo().search(domain)
 
         res = {
@@ -189,5 +189,4 @@ class XmpeApiYobelscm(http.Controller):
                     'mensaje': 'OK'
                 }
             }
-
         return res
