@@ -5,8 +5,8 @@
         Yobel SCM API Integration""",
 
     'description': """
-        Yobel SCM API for the Integration of Customer Masters, Orders, 
-        Shipments and Products, in addition to Order and Shipment 
+        Yobel SCM API for the Integration of Customer Masters, Orders,
+        Shipments and Products, in addition to Order and Shipment
         confirmations.
     """,
 
@@ -14,7 +14,7 @@
     'website': "https://www.xmarts.com",
 
     'category': 'Integration',
-    'version': '1.0.20220329',
+    'version': '1.0.20220401',
 
     # any module necessary for this one to work correctly
     'depends': ['base', 'product', 'stock', 'l10n_pe'],

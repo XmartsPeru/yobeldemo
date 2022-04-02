@@ -17,13 +17,13 @@ class XmpeApiYobelscm(http.Controller):
         username = ICPSudo.get_param('xmpe_api_yobelscm.username')
         passwd = ICPSudo.get_param('xmpe_api_yobelscm.passwd')
         if data['Seguridad']['compania'] != company or data['Seguridad'][
-            'usuario'] != username or data['Seguridad']['password'] != passwd:
+                'usuario'] != username or data['Seguridad']['password'] != passwd:
             return False
         return True
 
     @http.route('/web/ConfEmbarque', auth='none', type="json",
                 methods=['POST'],
-                csrf=False, cors='*')
+                csrf=False, cors='*', lover='chun')
     def conf_shipment(self, **kw):
         data = json.loads(http.request.httprequest.data)
         picking_model = http.request.env['stock.picking'].sudo().search(
@@ -47,21 +47,31 @@ class XmpeApiYobelscm(http.Controller):
             for pick in picking_model.filtered(
                     lambda p: p.yobel_state == 'sent'):
                 if pick.name == data['Mensaje']['Body']['ConfEmbarque'][
-                    'CEMEMB']:
+                        'CEMEMB']:
                     pick.yobel_state = 'lost'
-            res = 'ERROR'
+            res = {
+                'RetornoInsertResult': {
+                    'resultado': '0',
+                    'mensaje': 'ERROR'
+                }
+            }
         else:
             for pick in picking_model.filtered(
                     lambda p: p.yobel_state == 'sent'):
                 if pick.name == data['Mensaje']['Body']['ConfEmbarque'][
-                    'CEMEMB']:
+                        'CEMEMB']:
                     pick.yobel_state = 'confirmed'
-            res = 'OK'
+            res = {
+                'RetornoInsertResult': {
+                    'resultado': '1',
+                    'mensaje': 'OK'
+                }
+            }
         return res
 
     @http.route('/web/ConfPedido', auth='none', type="json",
                 methods=['POST'],
-                csrf=False, cors='*')
+                csrf=False, cors='*', lover='chun')
     def conf_order(self, **kw):
         data = json.loads(http.request.httprequest.data)
         _logger.info(data)
@@ -84,18 +94,28 @@ class XmpeApiYobelscm(http.Controller):
                     lambda p: p.yobel_state == 'sent'):
                 if pick.name == data['Mensaje']['Body']['ConfPedido']['CPINRO']:
                     pick.yobel_state = 'lost'
-            res = 'ERROR'
+            res = {
+                'RetornoInsertResult': {
+                    'resultado': '0',
+                    'mensaje': 'ERROR'
+                }
+            }
         else:
             for pick in picking_model.filtered(
                     lambda p: p.yobel_state == 'sent'):
                 if pick.name == data['Mensaje']['Body']['ConfPedido']['CPINRO']:
                     pick.yobel_state = 'confirmed'
-            res = 'OK'
+            res = {
+                'RetornoInsertResult': {
+                    'resultado': '1',
+                    'mensaje': 'OK'
+                }
+            }
         return res
 
     @http.route('/web/RetornoError', auth='none', type="json",
                 methods=['POST'],
-                csrf=False, cors='*')
+                csrf=False, cors='*', lover='chun')
     def error_messages(self, **kw):
         model_stock_picking = None
         datas = json.loads(http.request.httprequest.data)
@@ -105,8 +125,8 @@ class XmpeApiYobelscm(http.Controller):
             'product.template'].sudo().search(domain)
         model_stock_picking = http.request.env['stock.picking'].sudo() \
             .search(['|', ('id_mensaje_in', '=', datas['Mensaje']['Head'][
-            'id_mensaje']), ('id_mensaje_out', '=',
-                             datas['Mensaje']['Head']['id_mensaje'])])
+                'id_mensaje']), ('id_mensaje_out', '=',
+                                 datas['Mensaje']['Head']['id_mensaje'])])
         model_partner = http.request.env['res.partner'].sudo().search(domain)
         error_message = http.request.env['xmpe.error.msg'].sudo() \
             .search([('code', '=', datas['Mensaje']['Body']['codigo'])],
@@ -121,17 +141,27 @@ class XmpeApiYobelscm(http.Controller):
         if model_partner.ids != 0:
             model_partner.notify_message = error_message.description
 
-        res = 'ERROR'
+        res = {
+            'RetornoInsertResult': {
+                'resultado': '0',
+                'mensaje': 'ERROR'
+            }
+        }
 
         if not (
                 model_product_template.ids == [] and model_stock_picking.ids == [] and model_partner.ids == []):
-            res = 'OK'
+            res = {
+                'RetornoInsertResult': {
+                    'resultado': '1',
+                    'mensaje': 'OK'
+                }
+            }
 
         return res
 
     @http.route('/web/RetornoInsert', auth='none', type="json",
                 methods=['POST'],
-                csrf=False, cors='*')
+                csrf=False, cors='*', lover='chun')
     def insert_messages(self, **kw):
         datas = json.loads(http.request.httprequest.data)
         _logger.info(datas)
@@ -140,16 +170,23 @@ class XmpeApiYobelscm(http.Controller):
             'product.template'].sudo().search(domain)
         model_stock_picking = http.request.env['stock.picking'].sudo() \
             .search(['|', ('id_mensaje_in', '=', datas['Mensaje']['Head'][
-            'id_mensaje']), ('id_mensaje_out', '=',
-                             datas['Mensaje']['Head']['id_mensaje'])])
+                'id_mensaje']), ('id_mensaje_out', '=',
+                                 datas['Mensaje']['Head']['id_mensaje'])])
         model_partner = http.request.env['res.partner'].sudo().search(domain)
 
-        res = 'ERROR'
+        res = {
+            'RetornoInsertResult': {
+                'resultado': '0',
+                'mensaje': 'ERROR'
+            }
+        }
 
         if not (
                 model_product_template.ids == [] and model_stock_picking.ids == [] and model_partner.ids == []):
-            res = 'OK'
-
-
+            res = {
+                'RetornoInsertResult': {
+                    'resultado': '1',
+                    'mensaje': 'OK'
+                }
+            }
         return res
-

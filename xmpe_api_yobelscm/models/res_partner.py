@@ -157,30 +157,31 @@ class Partner(models.Model):
         return content
 
     def send_yobel_customer_data(self):
-        ICPSudo = self.env['ir.config_parameter'].sudo()
-        self.write({
-            'id_mensaje': self.env['ir.sequence'].next_by_code(
-                'yobel_master_prb')
-        })
-        data = {
-            "Seguridad": self.fill_security(),
-            "Mensaje": self.fill_message()
-        }
-        is_api_test = ICPSudo.get_param('xmpe_api_yobelscm.is_api_test')
-        if is_api_test:
-            _logger.info("Yobel Customer Data Test: %s", data_test)
-            req = self.send_yobel_data(url_test, data_test)
-        else:
-            _logger.info("Yobel Customer Data: %s", data)
-            req = self.send_yobel_data(url_test, data)
-            # self.write({'state': 'sent'})
-        if req['CrearClienteResult']['resultado'] == 'OK':
+        if self.yobel_sync:
+            ICPSudo = self.env['ir.config_parameter'].sudo()
             self.write({
-                'yobel_sync': False,
+                'id_mensaje': self.env['ir.sequence'].next_by_code(
+                    'yobel_master_prb')
             })
-            self.notify_message = 'Cliente enviado a Yobel SCM exitosamente'
-        else:
-            message = []
-            for error in req['CrearClienteResult']['errores']:
-                message.append(error['descripcion'])
-            self.notify_message = "\n ".join(message)
+            data = {
+                "Seguridad": self.fill_security(),
+                "Mensaje": self.fill_message()
+            }
+            is_api_test = ICPSudo.get_param('xmpe_api_yobelscm.is_api_test')
+            if is_api_test:
+                _logger.info("Yobel Customer Data Test: %s", data_test)
+                req = self.send_yobel_data(url_test, data_test)
+            else:
+                _logger.info("Yobel Customer Data: %s", data)
+                req = self.send_yobel_data(url_test, data)
+                # self.write({'state': 'sent'})
+            if req['CrearClienteResult']['resultado'] == 'OK':
+                self.write({
+                    'yobel_sync': False,
+                })
+                self.notify_message = 'Cliente enviado a Yobel SCM exitosamente'
+            else:
+                message = []
+                for error in req['CrearClienteResult']['errores']:
+                    message.append(error['descripcion'])
+                self.notify_message = "\n ".join(message)
