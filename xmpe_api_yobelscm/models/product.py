@@ -159,14 +159,11 @@ class ProductTemplate(models.Model):
                 })
         return {
             "Head": {
-                "id_mensaje":
-                self.id_mensaje,
-                "sistema_origen":
-                "SAP",
-                "fecha_origen":
-                self.origin_date.date().strftime(DEFAULT_SERVER_DATE_FORMAT),
-                "tipo":
-                "RECPRODU"
+                "id_mensaje": self.id_mensaje,
+                "sistema_origen": "SAP",
+                "fecha_origen": self.origin_date.date().strftime(
+                    DEFAULT_SERVER_DATE_FORMAT),
+                "tipo": "RECPRODU"
             },
             "Body": {
                 "Productos": product_list
@@ -200,8 +197,7 @@ class ProductTemplate(models.Model):
         if self.yobel_sync:
             ICPSudo = self.env['ir.config_parameter'].sudo()
             self.write({
-                'id_mensaje':
-                self.env['ir.sequence'].next_by_code('yobel_master_prb')
+                'id_mensaje': self.env['ir.sequence'].next_by_code('yobel_master_prb')
             })
             data = {
                 "Seguridad": self.fill_security(),
@@ -216,10 +212,8 @@ class ProductTemplate(models.Model):
 
             if req['CrearProductoHJResult']['resultado'] == 'OK':
                 self.write({
-                    'yobel_sync':
-                    False,
-                    'notify_message':
-                    'Producto enviado a Yobel SCM exitosamente',
+                    'yobel_sync': False,
+                    'notify_message': 'Producto enviado a Yobel SCM exitosamente',
                 })
             else:
                 message = []

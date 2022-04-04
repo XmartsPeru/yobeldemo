@@ -304,7 +304,7 @@ class Picking(models.Model):
                     'EMBNRO': rec.name,
                     'EMBFA1': rec.scheduled_date.strftime(DEFAULT_SERVER_DATE_FORMAT),
                     'EMBOCP': rec.name[:6],
-                    'EMBPRV1': rec.company_id.vat or '2021231214',
+                    'EMBPRV1': rec.company_id.vat or '20100211115',
                     'EMBPOR': rec.company_id.state_id.code,
                     'EMBNCT': '0001',
                     'EMBA01': '',
@@ -341,13 +341,9 @@ class Picking(models.Model):
         if self.yobel_sync:
             if self.picking_type_code != 'outgoing':
                 ICPSudo = self.env['ir.config_parameter'].sudo()
-                self.write(
-                    {
-                        'id_mensaje_in': self.env['ir.sequence'].next_by_code(
-                            'yobel_master_emb'
-                        )
-                    }
-                )
+                self.write({
+                    'id_mensaje_in': self.env['ir.sequence'].next_by_code('yobel_master_emb')
+                })
                 data = {
                     'Seguridad': self.fill_security(),
                     'Mensaje': self.fill_message(),
@@ -361,12 +357,10 @@ class Picking(models.Model):
                     req = self.send_yobel_data(url_yobel['shipment_test'], data)
                     # self.write({'state': 'sent'})
                 if req['CrearEmbarqueResult']['resultado'] == 'OK':
-                    self.write(
-                        {
-                            'yobel_sync': False,
-                            'yobel_state': 'sent',
-                        }
-                    )
+                    self.write({
+                        'yobel_sync': False,
+                        'yobel_state': 'sent',
+                    })
                     self.notify_message = 'Embarque enviado a Yobel SCM exitosamente'
                 else:
                     message = []
@@ -439,13 +433,9 @@ class Picking(models.Model):
         if self.yobel_sync:
             if self.picking_type_code == 'outgoing':
                 ICPSudo = self.env['ir.config_parameter'].sudo()
-                self.write(
-                    {
-                        'id_mensaje_out': self.env['ir.sequence'].next_by_code(
-                            'yobel_master_prb'
-                        )
-                    }
-                )
+                self.write({
+                    'id_mensaje_out': self.env['ir.sequence'].next_by_code('yobel_master_prb')
+                })
                 data = {
                     'Seguridad': self.fill_security(),
                     'Mensaje': self.fill_order_message(),
@@ -459,12 +449,10 @@ class Picking(models.Model):
                     req = self.send_yobel_data(url_yobel['order_test'], data)
                     # self.write({'state': 'sent'})
                 if req['CrearPedidoResult']['resultado'] == 'OK':
-                    self.write(
-                        {
-                            'yobel_sync': False,
-                            'yobel_state': 'sent',
-                        }
-                    )
+                    self.write({
+                        'yobel_sync': False,
+                        'yobel_state': 'sent',
+                    })
                     self.notify_message = 'Pedido enviado a Yobel SCM exitosamente'
                 else:
                     message = []

@@ -174,13 +174,9 @@ class Partner(models.Model):
     def send_yobel_customer_data(self):
         if self.yobel_sync:
             ICPSudo = self.env['ir.config_parameter'].sudo()
-            self.write(
-                {
-                    'id_mensaje': self.env['ir.sequence'].next_by_code(
-                        'yobel_master_prb'
-                    )
-                }
-            )
+            self.write({
+                'id_mensaje': self.env['ir.sequence'].next_by_code('yobel_master_prb')
+            })
             data = {
                 'Seguridad': self.fill_security(),
                 'Mensaje': self.fill_message(),
@@ -194,11 +190,9 @@ class Partner(models.Model):
                 req = self.send_yobel_data(url_test, data)
                 # self.write({'state': 'sent'})
             if req['CrearClienteResult']['resultado'] == 'OK':
-                self.write(
-                    {
-                        'yobel_sync': False,
-                    }
-                )
+                self.write({
+                    'yobel_sync': False,
+                })
                 self.notify_message = 'Cliente enviado a Yobel SCM exitosamente'
             else:
                 message = []
