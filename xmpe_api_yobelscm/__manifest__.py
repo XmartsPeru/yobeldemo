@@ -41,4 +41,3 @@
         # 'demo/demo.xml',
     ],
 }
-# -*- coding: utf-8 -*-

@@ -2,38 +2,45 @@
 <odoo>
     <data>
         <!-- Inherit Form View to Stock Picking -->
-        <record id="view_picking_form" model="ir.ui.view">
+        <record id="view_picking_form"
+            model="ir.ui.view">
             <field name="name">stock.picking.yobel.form</field>
             <field name="model">stock.picking</field>
-            <field name="inherit_id" ref="stock.view_picking_form"/>
-            <field name="arch" type="xml">
-
-                <xpath
-                        expr="//page[@name='operations']/field[@name='move_ids_without_package']/tree/field[@name='product_qty']" position="after">
-                    <field name="yobel_customer_warehouse" optional="True"/>
-                    <field name="additional_2" optional="True"/>
-                    <field name="numeric_2" optional="True"/>
-                    <field name="flag_2" optional="True"/>
-                    <field name="max_unit_per_package_picking" optional="True"/>
+            <field name="inherit_id"
+                ref="stock.view_picking_form"/>
+            <field name="arch"
+                type="xml">
+                <xpath expr="//page[@name='operations']/field[@name='move_ids_without_package']/tree/field[@name='product_qty']"
+                    position="after">
+                    <field name="yobel_customer_warehouse"
+                        optional="True"/>
+                    <field name="additional_2"
+                        optional="True"/>
+                    <field name="numeric_2"
+                        optional="True"/>
+                    <field name="flag_2"
+                        optional="True"/>
+                    <field name="max_unit_per_package_picking"
+                        optional="True"/>
                 </xpath>
 
-                <xpath expr="//group" position="after">
+                <xpath expr="//group"
+                    position="after">
                     <separator string="Integración con Yobel"/>
                     <group>
                         <label for="yobel_sync"/>
                         <div class="o_row">
-                            <field name="yobel_sync" widget="boolean_toggle"/>
+                            <field name="yobel_sync"
+                                widget="boolean_toggle"/>
                         </div>
                     </group>
-                    <group
-                            attrs="{'invisible': [('picking_type_code', '=', 'outgoing')]}">
+                    <group attrs="{'invisible': [('picking_type_code', '=', 'outgoing')]}">
                         <label for="id_mensaje_in"/>
                         <div class="o_row">
                             <field name="id_mensaje_in"/>
                         </div>
                     </group>
-                    <group
-                            attrs="{'invisible': [('picking_type_code', '!=', 'outgoing')]}">
+                    <group attrs="{'invisible': [('picking_type_code', '!=', 'outgoing')]}">
                         <label for="id_mensaje_out"/>
                         <div class="o_row">
                             <field name="id_mensaje_out"/>
@@ -43,8 +50,7 @@
                         <group attrs="{'invisible': [('picking_type_code', '=', 'outgoing')]}">
                             <field name="container_number"/>
                         </group>
-                        <group
-                                attrs="{'invisible': [('picking_type_code', '!=', 'outgoing')]}">
+                        <group attrs="{'invisible': [('picking_type_code', '!=', 'outgoing')]}">
                             <field name="store"/>
                             <field name="flag_1"/>
                         </group>
@@ -57,17 +63,21 @@
                     </group>
                 </xpath>
 
-                <xpath expr="//sheet" position="before">
+                <xpath expr="//sheet"
+                    position="before">
                     <button name="send_yobel_shipment_data"
-                            type="object" class="oe_link oe_inline"
-                            string="Enviar a Yobel"
-                            attrs="{'invisible': ['|', ('yobel_sync', '=', False),('picking_type_code', '=', 'outgoing')]}"/>
+                        type="object"
+                        class="oe_link oe_inline"
+                        string="Enviar a Yobel"
+                        attrs="{'invisible': ['|', ('yobel_sync', '=', False),('picking_type_code', '=', 'outgoing')]}"/>
                     <button name="send_yobel_order_data"
-                            type="object" class="oe_link oe_inline"
-                            string="Enviar a Yobel"
-                            attrs="{'invisible': ['|', ('yobel_sync', '=', False),('picking_type_code', '!=', 'outgoing')]}"/>
-                    <div class="alert alert-warning" role="alert"
-                         style="margin-bottom:0px;">
+                        type="object"
+                        class="oe_link oe_inline"
+                        string="Enviar a Yobel"
+                        attrs="{'invisible': ['|', ('yobel_sync', '=', False),('picking_type_code', '!=', 'outgoing')]}"/>
+                    <div class="alert alert-warning"
+                        role="alert"
+                        style="margin-bottom:0px;">
                         <field name="notify_message"/>
                     </div>
                 </xpath>
@@ -76,17 +86,22 @@
         </record>
 
         <!-- Inherit Form View Stock Move -->
-        <record id="view_picking_yobel_tree" model="ir.ui.view">
+        <record id="view_picking_yobel_tree"
+            model="ir.ui.view">
             <field name="name">view.picking.yobel.tree</field>
             <field name="model">stock.picking</field>
-            <field name="inherit_id" ref="stock.vpicktree"/>
-            <field name="arch" type="xml">
+            <field name="inherit_id"
+                ref="stock.vpicktree"/>
+            <field name="arch"
+                type="xml">
 
-                <xpath expr="//field[@name='state']" position="after">
-                    <field name="yobel_state" widget="badge"
-                           decoration-success="yobel_state == 'confirmed'"
-                           decoration-info="yobel_state in ('sent', 'accepted')"
-                           decoration-danger="yobel_state in ('reject', 'lost')"/>
+                <xpath expr="//field[@name='state']"
+                    position="after">
+                    <field name="yobel_state"
+                        widget="badge"
+                        decoration-success="yobel_state == 'confirmed'"
+                        decoration-info="yobel_state in ('sent', 'accepted')"
+                        decoration-danger="yobel_state in ('reject', 'lost')"/>
                 </xpath>
 
             </field>

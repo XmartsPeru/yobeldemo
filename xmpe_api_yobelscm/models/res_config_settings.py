@@ -17,8 +17,8 @@ class YobelSettings(models.TransientModel):
                                                   self.username)
         self.env['ir.config_parameter'].set_param('xmpe_api_yobelscm.passwd',
                                                   self.passwd)
-        self.env['ir.config_parameter'].set_param('xmpe_api_yobelscm.is_api_test',
-                                                  self.is_api_test)
+        self.env['ir.config_parameter'].set_param(
+            'xmpe_api_yobelscm.is_api_test', self.is_api_test)
         return res
 
     @api.model

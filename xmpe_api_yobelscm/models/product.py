@@ -27,60 +27,58 @@ data_test = {
             "tipo": "RECPRODU"
         },
         "Body": {
-            "Productos": [
-                {
-                    "PRDCIA": "LIB",
-                    "PRDPRO": "PRODLIB1001",
-                    "PRDDES": "PRODUCTO PRB",
-                    "PRDFAM": "FAMILIA",
-                    "PRDSFM": "SUBFAMILIA",
-                    "PRDCB1": "CODIGOBARRA1",
-                    "PRDUM1": "UND",
-                    "PRDUX1": "1234567",
-                    "PRDLR1": "12345.55",
-                    "PRDAN1": "12345.22",
-                    "PRDAL1": "12345.44",
-                    "PRDPE1": "1234567.33",
-                    "PRDVO1": "12345.999",
-                    "PRDCB2": "CODIGOBARRA2",
-                    "PRDUM2": "CAJ",
-                    "PRDUX2": "24",
-                    "PRDLR2": "",
-                    "PRDAN2": "12.00",
-                    "PRDAL2": "2.00",
-                    "PRDPE2": "50.00",
-                    "PRDVO2": "312.000",
-                    "PRDFML": "1",
-                    "PRDCSX": "SKUPRODUCTO1",
-                    "PRDSER": "0"
-                },
-                {
-                    "PRDCIA": "LIB",
-                    "PRDPRO": "PRODLIB1002",
-                    "PRDDES": "PRODUCTO PRB-PRODUCTO PRB-PRODUCTO PRB-PRODUCTO PRB",
-                    "PRDFAM": "FAMILIA",
-                    "PRDSFM": "SUBFAMILIA",
-                    "PRDCB1": "CODIGOBARRA1",
-                    "PRDUM1": "UND",
-                    "PRDUX1": "7",
-                    "PRDLR1": "13.00",
-                    "PRDAN1": "12.00",
-                    "PRDAL1": "2.00",
-                    "PRDPE1": "50.00",
-                    "PRDVO1": "312.000",
-                    "PRDCB2": "CODIGOBARRA2",
-                    "PRDUM2": "CAJ",
-                    "PRDUX2": "7",
-                    "PRDLR2": "13.00",
-                    "PRDAN2": "12.00",
-                    "PRDAL2": "2.00",
-                    "PRDPE2": "50.00",
-                    "PRDVO2": "312.000",
-                    "PRDFML": "1",
-                    "PRDCSX": "SKUPRODUCTO2",
-                    "PRDSER": "0"
-                }
-            ]
+            "Productos": [{
+                "PRDCIA": "LIB",
+                "PRDPRO": "PRODLIB1001",
+                "PRDDES": "PRODUCTO PRB",
+                "PRDFAM": "FAMILIA",
+                "PRDSFM": "SUBFAMILIA",
+                "PRDCB1": "CODIGOBARRA1",
+                "PRDUM1": "UND",
+                "PRDUX1": "1234567",
+                "PRDLR1": "12345.55",
+                "PRDAN1": "12345.22",
+                "PRDAL1": "12345.44",
+                "PRDPE1": "1234567.33",
+                "PRDVO1": "12345.999",
+                "PRDCB2": "CODIGOBARRA2",
+                "PRDUM2": "CAJ",
+                "PRDUX2": "24",
+                "PRDLR2": "",
+                "PRDAN2": "12.00",
+                "PRDAL2": "2.00",
+                "PRDPE2": "50.00",
+                "PRDVO2": "312.000",
+                "PRDFML": "1",
+                "PRDCSX": "SKUPRODUCTO1",
+                "PRDSER": "0"
+            }, {
+                "PRDCIA": "LIB",
+                "PRDPRO": "PRODLIB1002",
+                "PRDDES":
+                "PRODUCTO PRB-PRODUCTO PRB-PRODUCTO PRB-PRODUCTO PRB",
+                "PRDFAM": "FAMILIA",
+                "PRDSFM": "SUBFAMILIA",
+                "PRDCB1": "CODIGOBARRA1",
+                "PRDUM1": "UND",
+                "PRDUX1": "7",
+                "PRDLR1": "13.00",
+                "PRDAN1": "12.00",
+                "PRDAL1": "2.00",
+                "PRDPE1": "50.00",
+                "PRDVO1": "312.000",
+                "PRDCB2": "CODIGOBARRA2",
+                "PRDUM2": "CAJ",
+                "PRDUX2": "7",
+                "PRDLR2": "13.00",
+                "PRDAN2": "12.00",
+                "PRDAL2": "2.00",
+                "PRDPE2": "50.00",
+                "PRDVO2": "312.000",
+                "PRDFML": "1",
+                "PRDCSX": "SKUPRODUCTO2",
+                "PRDSER": "0"
+            }]
         }
     }
 }
@@ -113,12 +111,15 @@ class ProductTemplate(models.Model):
 
     notify_message = fields.Char(string=_('Notify Message'), )
 
-    id_mensaje = fields.Char(string=_('Mensaje ID'), copy=False, readonly=True,
-                             index=True, default=lambda self: _('New'))
+    id_mensaje = fields.Char(string=_('Mensaje ID'),
+                             copy=False,
+                             readonly=True,
+                             index=True,
+                             default=lambda self: _('New'))
 
     # Calcula el volumen del producto
-    @api.depends('product_variant_ids', 'product_variant_ids.volume',
-                 'length', 'high', 'width')
+    @api.depends('product_variant_ids', 'product_variant_ids.volume', 'length',
+                 'high', 'width')
     def _compute_volume(self):
         unique_variants = self.filtered(
             lambda template: len(template.product_variant_ids) == 1)
@@ -158,11 +159,14 @@ class ProductTemplate(models.Model):
                 })
         return {
             "Head": {
-                "id_mensaje": self.id_mensaje,
-                "sistema_origen": "SAP",
-                "fecha_origen": self.origin_date.date().strftime(
-                    DEFAULT_SERVER_DATE_FORMAT),
-                "tipo": "RECPRODU"
+                "id_mensaje":
+                self.id_mensaje,
+                "sistema_origen":
+                "SAP",
+                "fecha_origen":
+                self.origin_date.date().strftime(DEFAULT_SERVER_DATE_FORMAT),
+                "tipo":
+                "RECPRODU"
             },
             "Body": {
                 "Productos": product_list
@@ -181,7 +185,9 @@ class ProductTemplate(models.Model):
         try:
             data_json = json.dumps(data)
             _logger.info(json.dumps(data, indent=4))
-            req = requests.post(url=url_target, data=data_json, headers=headers)
+            req = requests.post(url=url_target,
+                                data=data_json,
+                                headers=headers)
             content = req.json()
         except IOError:
             _logger.error("Error in sending data to Yobel SCM")
@@ -194,8 +200,8 @@ class ProductTemplate(models.Model):
         if self.yobel_sync:
             ICPSudo = self.env['ir.config_parameter'].sudo()
             self.write({
-                'id_mensaje': self.env['ir.sequence'].next_by_code(
-                    'yobel_master_prb')
+                'id_mensaje':
+                self.env['ir.sequence'].next_by_code('yobel_master_prb')
             })
             data = {
                 "Seguridad": self.fill_security(),
@@ -210,8 +216,10 @@ class ProductTemplate(models.Model):
 
             if req['CrearProductoHJResult']['resultado'] == 'OK':
                 self.write({
-                    'yobel_sync': False,
-                    'notify_message': 'Producto enviado a Yobel SCM exitosamente',
+                    'yobel_sync':
+                    False,
+                    'notify_message':
+                    'Producto enviado a Yobel SCM exitosamente',
                 })
             else:
                 message = []
