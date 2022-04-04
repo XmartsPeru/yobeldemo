@@ -45,6 +45,10 @@
                         <div class="o_row">
                             <field name="id_mensaje_out"/>
                         </div>
+                        <label for="client_id"/>
+                        <div class="o_row">
+                            <field name="client_id"/>
+                        </div>
                     </group>
                     <group>
                         <group attrs="{'invisible': [('picking_type_code', '=', 'outgoing')]}">

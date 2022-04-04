@@ -272,6 +272,12 @@ class Picking(models.Model):
         default=lambda self: _('New'),
     )
 
+    client_id = fields.Many2one(
+        comodel_name="res.partner",
+        string="Yobel Cliente",
+        # domain="[('sync', '=', True)]"
+    )
+
     def fill_security(self):
         ICPSudo = self.env['ir.config_parameter'].sudo()
         return {
@@ -394,7 +400,7 @@ class Picking(models.Model):
                     'PEDFPR': rec.scheduled_date.strftime(DEFAULT_SERVER_DATE_FORMAT),
                     'PEDCTR': 'P1',
                     'PEDNRO': rec.name,
-                    'PEDCCL': rec.name,
+                    'PEDCCL': rec.client_id.vat,
                     'PEDFCH': rec.origin_date.strftime(DEFAULT_SERVER_DATE_FORMAT),
                     'PEDTIT': len(detail_list),
                     'PEDTUN': sum([d['PEDCTD'] for d in detail_list]),
