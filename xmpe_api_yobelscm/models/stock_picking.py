@@ -384,7 +384,7 @@ class Picking(models.Model):
                     {
                         'PEDAUX': detail.id,
                         'PEDCPR': detail.product_id.default_code,
-                        'PEDLOT': 'lote',
+                        'PEDLOT': '',
                         'PEDCTD': int(detail.quantity_done),
                         'PEDALM': detail.product_id.warehouse_id.name or '',
                         'PEDSKU': detail.product_id.supplier_sku_code,
