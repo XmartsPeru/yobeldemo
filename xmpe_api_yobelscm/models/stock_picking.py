@@ -387,7 +387,7 @@ class Picking(models.Model):
                         'PEDLOT': '',
                         'PEDCTD': int(detail.quantity_done),
                         'PEDALM': detail.product_id.warehouse_id.name or '',
-                        'PEDSKU': detail.product_id.supplier_sku_code,
+                        'PEDSKU': detail.product_id.supplier_sku_code or '',
                         'PEDUXE': detail.max_unit_per_package_picking or '',
                         'PEDA02': detail.additional_2 or '',
                         'PEDN02': detail.numeric_2,
