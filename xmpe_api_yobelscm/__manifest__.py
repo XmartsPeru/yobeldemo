@@ -14,7 +14,7 @@
     'website': "https://www.xmarts.com",
 
     'category': 'Integration',
-    'version': '1.0.20220405',
+    'version': '1.0.20220413',
 
     # any module necessary for this one to work correctly
     'depends': ['base', 'product', 'stock', 'l10n_pe'],
